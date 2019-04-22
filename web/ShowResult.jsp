@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1" %>
+<jsp:useBean id="page_num" scope="request" type="java.lang.String"/>
+<jsp:useBean id="keyword" scope="request" type="java.lang.String"/>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Jerry
@@ -10,13 +12,105 @@
 <html>
 <head>
     <title>我把这世间的一切都放在这了</title>
+    <style>
+        #SearchForm {
+            position: relative;
+            left: 20px;
+            margin: 0 auto
+        }
+
+        #SearchKeyWord {
+            height: 30px;
+            width: 400px;
+            border: 1px solid #ccc;
+            border-radius: 3px; /*css3属性IE不支持*/
+        }
+
+        #SearchInputButton {
+            height: 30px;
+            width: 50px;
+            font-size: 16px;
+            padding: 0;
+            border: 0;
+            margin: 0;
+        }
+
+        li {
+            list-style: none;
+            margin: 10px;
+        }
+
+        .song_info {
+            display: inline-block
+        }
+
+        .song_icon {
+            height: 80px;
+            width: auto;
+        }
+
+
+        #song_text_info {
+            height: 80px;
+            width: auto;
+            vertical-align: top;
+        }
+
+        .song_name {
+            display: block;
+            margin: 10px 0 10px;
+            line-height: 18px;
+            font-size: 20px;
+            font-weight: 400;
+            color: #000;
+        }
+
+        .song_quality {
+            border-radius: 5px;
+            border: 2px solid #13CE66;
+            font-size: 20px;
+            color: #13CE66;
+        }
+
+        #LastPageButton{
+            display: inline-block;
+            width: 100px; /* 宽度 */
+            height: 40px; /* 高度 */
+            border-width: 0px; /* 边框宽度 */
+            border-radius: 3px; /* 边框半径 */
+            background: #cccccc; /* 背景颜色 */
+            outline: none; /* 不显示轮廓线 */
+            color: white; /* 字体颜色 */
+            font-size: 17px; /* 字体大小 */
+        }
+        #NowPage{
+            display: inline-block;
+            width: 80px; /* 宽度 */
+            height: 40px; /* 高度 */
+            color: black; /* 字体颜色 */
+            font-size: 17px; /* 字体大小 */
+            text-align:center
+        }
+        #NextPageButton{
+            display: inline-block;
+            width: 100px; /* 宽度 */
+            height: 40px; /* 高度 */
+            border-width: 0px; /* 边框宽度 */
+            border-radius: 3px; /* 边框半径 */
+            background: #cccccc; /* 背景颜色 */
+            outline: none; /* 不显示轮廓线 */
+            color: white; /* 字体颜色 */
+            font-size: 17px; /* 字体大小 */
+        }
+    </style>
 </head>
 <body>
 <header>
-    <form action="${pageContext.request.contextPath}/S" method="post">
+    <form id="SearchForm" action="${pageContext.request.contextPath}/S" method="post">
         <label>
-            <input type="search" name="key_word">
-        </label><input type="submit" value="搜索">
+            <input id="SearchKeyWord" type="search" name="key_word" value="${keyword}">
+            <input id="PageNumInput" type="hidden" name="page_num" value="1">
+        </label><input id="SearchInputButton" type="submit" value="搜索">
     </form>
 </header>
 <div>
@@ -28,22 +122,44 @@
             <ul>
                 <jsp:useBean id="list" scope="request" type="java.util.List"/>
                 <c:forEach items="${list}" var="a_song">
-                    <li>
-                        <img src="${a_song.album_pic}" alt="假装有一张专辑图片">
-                        <p>${a_song.song_name}</p>
-                        <c:choose>
-                            <c:when test="${a_song.best_quality_file!=null}">
-                                <a href="${a_song.best_quality_file}">${a_song.best_quality}</a>
-                            </c:when>
-                            <c:otherwise>
-                                <p>人家不给下载，我也没有办法</p>
-                            </c:otherwise>
-                        </c:choose>
+                    <li class="song_list">
+                        <div class="song_info">
+                            <img class="song_icon" src="${a_song.album_pic}" alt="假装这里有一张专辑图片"/>
+                        </div>
+                        <div id="song_text_info" class="song_info">
+                            <span class="song_name">${a_song.song_name}</span>
+                            <sup class="song_quality">${a_song.best_quality}</sup>
+                            <spanp class="singer_name">...</spanp>
+                        </div>
                     </li>
                 </c:forEach>
             </ul>
         </c:otherwise>
     </c:choose>
 </div>
+<footer style="padding-inline-start: 50px;">
+    <input id="LastPageButton" onclick="lastPage()" type="button" value="上一页">
+    <span id="NowPage">${page_num}</span>
+    <input id="NextPageButton" onclick="nextPage()" type="button" value="下一页">
+</footer>
+<script>
+    var page_num = parseInt(${page_num});
+    if (page_num > 1)
+        document.getElementById("LastPageButton").style.background = "#1E90FF";
+    document.getElementById("NextPageButton").style.background = "#1E90FF";
+    var key_word = document.getElementById("SearchKeyWord").value;
+
+    function lastPage() {
+        document.getElementById("PageNumInput").value = page_num - 1;
+        document.getElementById("SearchKeyWord").value = key_word;
+        document.getElementById("SearchForm").submit();
+    }
+
+    function nextPage() {
+        document.getElementById("PageNumInput").value = page_num + 1;
+        document.getElementById("SearchKeyWord").value = key_word;
+        document.getElementById("SearchForm").submit();
+    }
+</script>
 </body>
 </html>
