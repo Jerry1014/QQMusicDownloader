@@ -38,12 +38,13 @@
         }
 
         #searchinputbutton {
+            position: relative;
+            top: 2px;
             height: 30px;
             width: 50px;
             font-size: 16px;
-            padding: 0;
-            border: 0;
-            margin: 0;
+            border: 1px solid #ccc;
+            border-radius: 3px; /*css3属性IE不支持*/
         }
     </style>
 </head>
@@ -52,9 +53,7 @@
     <div id="main_pic"><img src="img/eason_body_pic.jpg" alt="假装有一张图片">
     </div>
     <form id="searchinputform" action="${pageContext.request.contextPath}/S" method="post">
-        <label>
-            <input id="searchinput" type="search" name="key_word">
-        </label>
+        <label for="searchinput"><input id="searchinput" type="search" name="key_word"></label>
         <input id="searchinputbutton" type="submit" value="搜索">
         <input type="hidden" name="page_num" value="1">
     </form>

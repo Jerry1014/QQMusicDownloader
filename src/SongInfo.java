@@ -1,3 +1,4 @@
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import java.io.IOException;
@@ -7,6 +8,7 @@ public class SongInfo {
     private String best_quality_file = null;
     private String best_quality = null;
     private String song_name = null;
+    private String singer = null;
 
     SongInfo(JSONObject song_info) throws IOException {
         this.song_name = song_info.getString("songname");
@@ -22,6 +24,17 @@ public class SongInfo {
         } else if (song_info.getInteger("size128") != 0) {
             this.best_quality = "128";
         }else this.best_quality = "无法获取";
+
+        JSONArray singer_json_list = song_info.getJSONArray("singer");
+        StringBuilder tem_singer_name_list = new StringBuilder();
+
+        tem_singer_name_list.append(((JSONObject) singer_json_list.getJSONObject(0)).getString("name"));
+        for (int time = 1; time < singer_json_list.size(); time++) {
+            tem_singer_name_list.append(' ');
+            tem_singer_name_list.append(((JSONObject) singer_json_list.getJSONObject(time)).getString("name"));
+        }
+        this.singer = tem_singer_name_list.toString();
+
 
         GetSongInfoJson songinfo = new GetSongInfoJson();
         JSONObject songinfoJson = songinfo.getVkey(song_id);
@@ -51,5 +64,9 @@ public class SongInfo {
 
     public String getSong_name() {
         return song_name;
+    }
+
+    public String getSinger() {
+        return singer;
     }
 }

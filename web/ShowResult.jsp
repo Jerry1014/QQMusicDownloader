@@ -1,7 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1" %>
 <jsp:useBean id="page_num" scope="request" type="java.lang.String"/>
 <jsp:useBean id="keyword" scope="request" type="java.lang.String"/>
-<%@ page import="java.util.List" %><%--
+<jsp:useBean id="list" scope="request" type="java.util.List"/>
+<%--
   Created by IntelliJ IDEA.
   User: Jerry
   Date: 2019/4/18
@@ -27,17 +28,17 @@
         }
 
         #SearchInputButton {
+            position: relative;
+            top: 1px;
             height: 30px;
             width: 50px;
             font-size: 16px;
-            padding: 0;
-            border: 0;
-            margin: 0;
+            border: 1px solid #ccc;
+            border-radius: 3px; /*css3属性IE不支持*/
         }
 
         li {
             list-style: none;
-            margin: 10px;
         }
 
         .song_info {
@@ -49,10 +50,9 @@
             width: auto;
         }
 
-
         #song_text_info {
             height: 80px;
-            width: auto;
+            width: 30%;
             vertical-align: top;
         }
 
@@ -66,36 +66,63 @@
         }
 
         .song_quality {
+            position: relative;
+            top: 2px;
             border-radius: 5px;
             border: 2px solid #13CE66;
             font-size: 20px;
             color: #13CE66;
         }
 
-        #LastPageButton{
+        #play_download {
+            display: inline-block;
+            vertical-align: top;
+            height: 80px;
+            width: auto;
+            position: absolute;
+            left: 40%;
+        }
+
+        .icon_download {
+            height: 40px;
+            width: 40px;
+            border: 0;
+            background-size: 40px auto;
+            background-color: transparent;
+            background-image: url("./img/download.png");
+            transition-duration: 0.4s;
+        }
+
+        .icon_download:hover {
+            background-image: url("./img/download_hover.png");
+        }
+
+        #LastPageButton {
             display: inline-block;
             width: 100px; /* 宽度 */
             height: 40px; /* 高度 */
-            border-width: 0px; /* 边框宽度 */
+            border-width: 0; /* 边框宽度 */
             border-radius: 3px; /* 边框半径 */
             background: #cccccc; /* 背景颜色 */
             outline: none; /* 不显示轮廓线 */
             color: white; /* 字体颜色 */
             font-size: 17px; /* 字体大小 */
         }
-        #NowPage{
+
+        #NowPage {
             display: inline-block;
             width: 80px; /* 宽度 */
             height: 40px; /* 高度 */
             color: black; /* 字体颜色 */
             font-size: 17px; /* 字体大小 */
-            text-align:center
+            text-align: center
         }
-        #NextPageButton{
+
+        #NextPageButton {
             display: inline-block;
             width: 100px; /* 宽度 */
             height: 40px; /* 高度 */
-            border-width: 0px; /* 边框宽度 */
+            border-width: 0; /* 边框宽度 */
             border-radius: 3px; /* 边框半径 */
             background: #cccccc; /* 背景颜色 */
             outline: none; /* 不显示轮廓线 */
@@ -120,7 +147,6 @@
         </c:when>
         <c:otherwise>
             <ul>
-                <jsp:useBean id="list" scope="request" type="java.util.List"/>
                 <c:forEach items="${list}" var="a_song">
                     <li class="song_list">
                         <div class="song_info">
@@ -129,7 +155,13 @@
                         <div id="song_text_info" class="song_info">
                             <span class="song_name">${a_song.song_name}</span>
                             <sup class="song_quality">${a_song.best_quality}</sup>
-                            <spanp class="singer_name">...</spanp>
+                            <spanp class="singer_name">${a_song.singer}</spanp>
+                        </div>
+                        <div id="play_download" class="song_info">
+                            <audio src="${a_song.best_quality_file}" controls></audio>
+                            <a href="${a_song.best_quality_file}"
+                               download="${a_song.singer} - ${a_song.song_name}.${a_song.best_quality}"><input
+                                    type="button" class="icon_download"/></a>
                         </div>
                     </li>
                 </c:forEach>
