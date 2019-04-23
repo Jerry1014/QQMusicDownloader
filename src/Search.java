@@ -17,7 +17,7 @@ public class Search extends javax.servlet.http.HttpServlet {
 
         String keyword = request.getParameter("key_word");
         String page_num = request.getParameter("page_num");
-        if (keyword.length() > 0) {
+        if (keyword != null && keyword.length() > 0) {
             // 请求qq音乐，得到json结果
             GetSongInfoJson song_list_json = new GetSongInfoJson();
             JSONArray song_json_list = song_list_json.getSongList(keyword, page_num, request.getHeader("user_agent"));
