@@ -52,13 +52,13 @@
             transform: translateY(2px);
         }
 
-        #LastPageButton {
+        .LastNextButton{
             display: inline-block;
             width: 100px; /* 宽度 */
             height: 40px; /* 高度 */
             border-width: 0; /* 边框宽度 */
             border-radius: 3px; /* 边框半径 */
-            background: #cccccc; /* 背景颜色 */
+            background: #1E90FF; /* 背景颜色 */
             outline: none; /* 不显示轮廓线 */
             color: white; /* 字体颜色 */
             font-size: 17px; /* 字体大小 */
@@ -71,18 +71,6 @@
             color: black; /* 字体颜色 */
             font-size: 17px; /* 字体大小 */
             text-align: center
-        }
-
-        #NextPageButton {
-            display: inline-block;
-            width: 100px; /* 宽度 */
-            height: 40px; /* 高度 */
-            border-width: 0; /* 边框宽度 */
-            border-radius: 3px; /* 边框半径 */
-            background: #cccccc; /* 背景颜色 */
-            outline: none; /* 不显示轮廓线 */
-            color: white; /* 字体颜色 */
-            font-size: 17px; /* 字体大小 */
         }
     </style>
 
@@ -99,8 +87,8 @@
 </header>
 <div>
     <c:choose>
-        <c:when test="${list==null}">
-            <p>暂无结果</p>
+        <c:when test="${list.size()<1}">
+            <p style="padding-inline-start: 40px;">暂无结果</p>
         </c:when>
         <c:otherwise>
             <ul>
@@ -128,15 +116,16 @@
 <script type="text/javascript">initModel("assets/")</script>
 
 <footer style="padding-inline-start: 50px;">
-    <input id="LastPageButton" onclick="lastPage()" type="button" value="上一页">
+    <input id="LastPageButton" class="LastNextButton" onclick="lastPage()" type="button" value="上一页">
     <span id="NowPage">${page_num}</span>
-    <input id="NextPageButton" onclick="nextPage()" type="button" value="下一页">
+    <input id="NextPageButton" class="LastNextButton" onclick="nextPage()" type="button" value="下一页">
 </footer>
 <script>
     var page_num = parseInt(${page_num});
-    if (page_num > 1)
-        document.getElementById("LastPageButton").style.background = "#1E90FF";
-    document.getElementById("NextPageButton").style.background = "#1E90FF";
+    if (page_num <= 1){
+        document.getElementById("LastPageButton").style.background = "#cccccc";
+        document.getElementById("LastPageButton").disabled = "true";
+    }
     var key_word = document.getElementById("SearchKeyWord").value;
 
     function lastPage() {
