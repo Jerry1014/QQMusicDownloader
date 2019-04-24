@@ -35,6 +35,19 @@
             font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 3px; /*css3属性IE不支持*/
+            box-shadow: 0 4px #999;
+            background-color: lightskyblue;
+            color: white;
+        }
+
+        #SearchInputButton:hover {
+            background-color: deepskyblue;
+        }
+
+        #SearchInputButton:active {
+            background-color: dodgerblue;
+            box-shadow: 0 2px #666;
+            transform: translateY(2px);
         }
 
         #LastPageButton {

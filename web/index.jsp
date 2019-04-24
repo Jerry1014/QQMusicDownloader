@@ -39,12 +39,25 @@
 
         #searchinputbutton {
             position: relative;
-            top: 2px;
             height: 30px;
-            width: 50px;
+            width: 80px;
             font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 3px; /*css3属性IE不支持*/
+            box-shadow: 0 4px #999;
+            background-color: lightskyblue;
+            color: white;
+        }
+
+        #searchinputbutton:hover {
+            background-color: deepskyblue;
+
+        }
+
+        #searchinputbutton:active {
+            background-color: dodgerblue;
+            box-shadow: 0 2px #666;
+            transform: translateY(2px);
         }
     </style>
 </head>
