@@ -115,7 +115,7 @@
 <script src="assets/live2d.js"></script>
 <script type="text/javascript">initModel("assets/")</script>
 
-<footer style="padding-inline-start: 50px;">
+<footer style="padding-inline-start: 30px;">
     <input id="LastPageButton" class="LastNextButton" onclick="lastPage()" type="button" value="上一页">
     <span id="NowPage">${page_num}</span>
     <input id="NextPageButton" class="LastNextButton" onclick="nextPage()" type="button" value="下一页">

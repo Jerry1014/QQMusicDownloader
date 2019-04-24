@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>年轻人，你这个想法很危险</title>
+    <title>来搜吧，我这里什么歌都有</title>
     <style>
         body {
             text-align: center;
@@ -67,7 +67,8 @@
 </head>
 <body>
 <div id="main">
-    <div id="main_pic"><img src="img/eason_body_pic.jpg" alt="假装有一张图片">
+    <div id="main_pic">
+        <img src="img/music.png" alt="假装有一张图片">
     </div>
     <form id="searchinputform" action="${pageContext.request.contextPath}/S" method="post">
         <label for="searchinput"><input id="searchinput" type="search" name="key_word"></label>
