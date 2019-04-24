@@ -1,8 +1,5 @@
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-
 import java.io.IOException;
-import java.util.ArrayList;
+import java.net.URLEncoder;
 import java.util.List;
 
 public class Search extends javax.servlet.http.HttpServlet {
@@ -19,15 +16,13 @@ public class Search extends javax.servlet.http.HttpServlet {
         String page_num = request.getParameter("page_num");
         if (keyword != null && keyword.length() > 0) {
             // 请求qq音乐，得到json结果
-            GetSongInfoJson song_list_json = new GetSongInfoJson();
-            JSONArray song_json_list = song_list_json.getSongList(keyword, page_num, request.getHeader("user_agent"));
+//            GetSongInfoJson song_list_json = new GetSongInfoJsonByQQAPI();
+            GetSongInfoJson song_list_json = new GetSongInfoJsonByBZQLLQQAPI();
+            // url补全
+            String keyword_utf8 = URLEncoder.encode(keyword.replaceAll(" ", "+"), "utf-8");
 
             // 将歌曲jsonarray转变为SongInfo List
-            List<SongInfo> song_list = new ArrayList<>();
-            for (int time = 0; time < song_json_list.size(); time++) {
-                JSONObject tem_song_info = (JSONObject) song_json_list.getJSONObject(time);
-                if (tem_song_info.getString("songmid").length() > 0) song_list.add(new SongInfo(tem_song_info));
-            }
+            List song_list = song_list_json.getSongList(keyword_utf8, page_num, request.getHeader("user_agent"));
 
             request.setAttribute("keyword", keyword);
             request.setAttribute("list", song_list);
