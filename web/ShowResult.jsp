@@ -25,6 +25,8 @@
             width: 400px;
             border: 1px solid #ccc;
             border-radius: 3px; /*css3属性IE不支持*/
+            box-shadow: 0 2px #999;
+            padding: 1px 1px 1px 5px;
         }
 
         #SearchInputButton {
@@ -84,7 +86,7 @@
         }
     </style>
 
-    <link rel="stylesheet" type="text/css" href="assets/waifu.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/waifu.css?version=1433"/>
 </head>
 <body>
 <header>
