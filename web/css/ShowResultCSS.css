@@ -1,0 +1,58 @@
+#SearchForm {
+    position: relative;
+    left: 20px;
+    margin: 0 auto
+}
+
+#SearchKeyWord {
+    height: 30px;
+    width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 3px; /*css3属性IE不支持*/
+    box-shadow: 0 2px #999;
+    padding: 1px 1px 1px 5px;
+}
+
+#SearchInputButton {
+    position: relative;
+    top: 1px;
+    height: 30px;
+    width: 50px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 3px; /*css3属性IE不支持*/
+    box-shadow: 0 4px #999;
+    background-color: lightskyblue;
+    color: white;
+}
+
+#SearchInputButton:hover {
+    background-color: deepskyblue;
+}
+
+#SearchInputButton:active {
+    background-color: dodgerblue;
+    box-shadow: 0 2px #666;
+    transform: translateY(2px);
+}
+
+.LastNextButton{
+    display: inline-block;
+    width: 100px; /* 宽度 */
+    height: 40px; /* 高度 */
+    border-width: 0; /* 边框宽度 */
+    border-radius: 3px; /* 边框半径 */
+    background: #1E90FF; /* 背景颜色 */
+    outline: none; /* 不显示轮廓线 */
+    color: white; /* 字体颜色 */
+    font-size: 17px; /* 字体大小 */
+}
+
+#NowPage {
+    display: inline-block;
+    width: 80px; /* 宽度 */
+    height: 40px; /* 高度 */
+    color: black; /* 字体颜色 */
+    font-size: 17px; /* 字体大小 */
+    text-align: center
+}

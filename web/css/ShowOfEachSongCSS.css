@@ -1,0 +1,61 @@
+li {
+    list-style: none;
+}
+
+.song_info {
+    display: inline-block
+}
+
+.song_icon {
+    height: 80px;
+    width: auto;
+}
+
+#song_text_info {
+    height: 80px;
+    width: 30%;
+    vertical-align: top;
+}
+
+.song_name {
+    display: block;
+    margin: 10px 0 10px;
+    line-height: 18px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #000;
+}
+
+.song_quality {
+    position: relative;
+    top: 2px;
+    border-radius: 5px;
+    border: 2px solid #13CE66;
+    font-size: 20px;
+    color: #13CE66;
+}
+
+#play_download {
+    display: inline-block;
+    vertical-align: top;
+    height: 80px;
+    width: auto;
+    position: absolute;
+    left: 40%;
+}
+
+.icon_download {
+    position: relative;
+    top: -8px;
+    height: 40px;
+    width: 40px;
+    border: 0;
+    background-size: 40px auto;
+    background-color: transparent;
+    background-image: url("/img/download.png");
+    transition-duration: 0.4s;
+}
+
+.icon_download:hover {
+    background-image: url("/img/download_hover.png");
+}
