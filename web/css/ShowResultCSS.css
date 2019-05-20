@@ -1,3 +1,5 @@
+/*改了css，一定要去jsp里面把version改一下*/
+
 #SearchForm {
     position: relative;
     left: 20px;
@@ -46,7 +48,20 @@
     outline: none; /* 不显示轮廓线 */
     color: white; /* 字体颜色 */
     font-size: 17px; /* 字体大小 */
+    box-shadow: 0 4px #999;
+    padding: 1px 1px 1px 5px;
 }
+
+.LastNextButton:hover {
+    background-color: deepskyblue;
+}
+
+.LastNextButton:active {
+    background-color: dodgerblue;
+    box-shadow: 0 2px #666;
+    transform: translateY(2px);
+}
+
 
 #NowPage {
     display: inline-block;

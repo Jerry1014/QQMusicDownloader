@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class Search extends javax.servlet.http.HttpServlet {
@@ -17,21 +18,24 @@ public class Search extends javax.servlet.http.HttpServlet {
         if (keyword != null && keyword.length() > 0) {
             // 请求qq音乐，得到json结果
             String selected_api = request.getParameter("SelectedApi");
-            GetSongInfoJson song_list_json;
+            GetSongInfoJson song_json_list;
+            //if (selected_api == null) selected_api = "默认";
             switch (selected_api) {
                 case "QQMusic":
-                    song_list_json = new GetSongInfoJsonByQQAPI();
+                    song_json_list = new GetSongInfoJsonByQQAPI();
                     break;
                 default:
-                    song_list_json = new GetSongInfoJsonByQQAPI();
+                    song_json_list = new GetSongInfoJsonByQQAPI();
                     break;
             }
             // url补全
-            String keyword_utf8 = URLEncoder.encode(keyword.replaceAll(" ", "+"), "utf-8");
+            String keyword_utf8 = URLEncoder.encode(keyword.replaceAll(" ", "+"), StandardCharsets.UTF_8);
 
             // 将歌曲jsonarray转变为SongInfo List
-            List song_list = song_list_json.getSongList(keyword_utf8, page_num, request.getHeader("user_agent"));
+            List song_list = song_json_list.getSongList(keyword_utf8, page_num, request.getHeader("user_agent"));
 
+            request.setAttribute("total_page_num", song_json_list.getTotal_page_num());
+            request.setAttribute("selectedApi", selected_api);
             request.setAttribute("keyword", keyword);
             request.setAttribute("list", song_list);
             request.setAttribute("page_num", page_num);

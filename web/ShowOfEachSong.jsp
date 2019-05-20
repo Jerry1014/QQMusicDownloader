@@ -6,7 +6,7 @@
         <div id="song_text_info" class="song_info">
             <div class="song_name_album_name">
                 <span id="song_name">${a_song.song_name}</span>
-                <span id="album_name">专辑:${a_song.album_name}</span>
+                <span id="album_name">- ${a_song.album_name}</span>
             </div>
             <sup class="song_quality">${a_song.quality}</sup>
             <spanp class="singer_name">${a_song.singer}</spanp>

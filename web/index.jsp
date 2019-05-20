@@ -9,61 +9,10 @@
 <html>
 <head>
     <title>来搜吧，我这里什么歌都有</title>
-    <style>
-        body {
-            text-align: center;
-        }
 
-        #main {
-            position: relative;
-            top: 10%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        #main_pic {
-            transform: scale(0.7);
-        }
-
-        #searchinputform {
-            position: relative;
-            top: 20px;
-        }
-
-        #searchinput {
-            height: 30px;
-            width: 400px;
-            border: 1px solid #ccc;
-            border-radius: 3px; /*css3属性IE不支持*/
-            box-shadow: 0 2px #999;
-            padding: 1px 1px 1px 5px;
-        }
-
-        #searchinputbutton {
-            position: relative;
-            height: 30px;
-            width: 80px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 3px; /*css3属性IE不支持*/
-            box-shadow: 0 4px #999;
-            background-color: lightskyblue;
-            color: white;
-        }
-
-        #searchinputbutton:hover {
-            background-color: deepskyblue;
-
-        }
-
-        #searchinputbutton:active {
-            background-color: dodgerblue;
-            box-shadow: 0 2px #666;
-            transform: translateY(2px);
-        }
-    </style>
-
-    <link rel="stylesheet" type="text/css" href="assets/waifu.css?version=1433"/>
+    <%--version记录了最后一次对css文件作修改的时间，用于刷新浏览器的css缓存--%>
+    <link rel="stylesheet" type="text/css" href="css/indexCSS.css?version=1905201912"/>
+    <link rel="stylesheet" type="text/css" href="assets/waifu.css?version=1905201912"/>
 </head>
 <body>
 <div id="main">

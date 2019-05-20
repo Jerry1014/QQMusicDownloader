@@ -14,11 +14,17 @@ public class GetSongInfoJsonByQQAPI extends GetSongInfoJson {
 
     private String request_vkey_url = "https://c.y.qq.com/base/fcgi-bin/fcg_music_express_mobile3.fcg?format=json205361747&platform=yqq&cid=205361747&songmid=%s&filename=C400%s.m4a&guid=126548448";
 
+
     List getSongList(String keyword, String page_num, String ua) throws IOException {
-        String all_url = String.format(this.request_url, page_num, this.each_page_num, keyword);
+        String all_url = String.format(this.request_url, page_num, this.each_page_song_num, keyword);
         String connection_response = get_connection(new URL(all_url), ua, request_method, referer_url);
 
-        JSONArray song_json_list = JSONObject.parseObject(connection_response.replaceAll("^callback\\(", "").replaceAll("\\)$", "")).getJSONObject("data").getJSONObject("song").getJSONArray("list");
+        JSONObject song_list_with_info = JSONObject.parseObject(connection_response.replaceAll
+                ("^callback\\(", "").replaceAll("\\)$", ""))
+                .getJSONObject("data").getJSONObject("song");
+        // 当each_page_song_num大于1000时，此处会产生bug
+        this.total_page_num = String.valueOf((int) (song_list_with_info.getInteger("totalnum") / Float.parseFloat(each_page_song_num) + 0.9999));
+        JSONArray song_json_list = song_list_with_info.getJSONArray("list");
 
         return getList(song_json_list);
     }

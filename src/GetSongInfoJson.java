@@ -7,7 +7,8 @@ import java.util.List;
 
 abstract class GetSongInfoJson {
     // 全局设置
-    String each_page_num = "10";
+    String each_page_song_num = "10";
+    String total_page_num = null;
     private int time_out = 5000;
 
     abstract List getSongList(String keyword, String page_num, String ua) throws IOException;
@@ -31,5 +32,10 @@ abstract class GetSongInfoJson {
         connection.disconnect();// 断开连接
 
         return sb.toString();
+    }
+
+    String getTotal_page_num() {
+        assert total_page_num != null : "先通过getSongList得到歌曲信息才能使用";
+        return total_page_num;
     }
 }
