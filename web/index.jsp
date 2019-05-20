@@ -71,6 +71,13 @@
         <img src="img/music.png" alt="假装有一张图片">
     </div>
     <form id="searchinputform" action="${pageContext.request.contextPath}/S" method="post">
+        <label>
+            <select name="SelectedApi">
+                <option value="QQMusic">QQ音乐</option>
+                <option value="Test">测试用,还没做</option>
+            </select>
+        </label>
+
         <label for="searchinput"><input id="searchinput" type="search" name="key_word"></label>
         <input id="searchinputbutton" type="submit" value="搜索">
         <input type="hidden" name="page_num" value="1">

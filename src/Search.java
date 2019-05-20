@@ -16,8 +16,16 @@ public class Search extends javax.servlet.http.HttpServlet {
         String page_num = request.getParameter("page_num");
         if (keyword != null && keyword.length() > 0) {
             // 请求qq音乐，得到json结果
-//            GetSongInfoJson song_list_json = new GetSongInfoJsonByQQAPI();
-            GetSongInfoJson song_list_json = new GetSongInfoJsonByQQAPI();
+            String selected_api = request.getParameter("SelectedApi");
+            GetSongInfoJson song_list_json;
+            switch (selected_api) {
+                case "QQMusic":
+                    song_list_json = new GetSongInfoJsonByQQAPI();
+                    break;
+                default:
+                    song_list_json = new GetSongInfoJsonByQQAPI();
+                    break;
+            }
             // url补全
             String keyword_utf8 = URLEncoder.encode(keyword.replaceAll(" ", "+"), "utf-8");
 
