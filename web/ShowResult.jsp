@@ -92,7 +92,7 @@
         </c:when>
         <c:otherwise>
             <ul>
-                <%@include file="ShowASongInfoFromBZQLL.jsp" %>
+                <%@include file="ShowASongInfoFromQQ.jsp" %>
             </ul>
         </c:otherwise>
     </c:choose>
