@@ -23,7 +23,7 @@ public class GetSongInfoJsonByQQAPI extends GetSongInfoJson {
         return getList(song_json_list);
     }
 
-    static List getList(JSONArray song_json_list) throws IOException {
+    private static List getList(JSONArray song_json_list) throws IOException {
         List<SongInfoByQQAPI> song_list = new ArrayList<>();
         for (int time = 0; time < song_json_list.size(); time++) {
             song_list.add(new SongInfoByQQAPI((JSONObject) song_json_list.getJSONObject(time)));
@@ -42,23 +42,24 @@ public class GetSongInfoJsonByQQAPI extends GetSongInfoJson {
 
 class SongInfoByQQAPI extends SongInfo {
     SongInfoByQQAPI(JSONObject song_info) throws IOException {
+        this.album_name = song_info.getString("albumname");
         this.song_name = song_info.getString("songname");
         Integer albumid = song_info.getInteger("albumid");
         this.album_pic = String.format("http://imgcache.qq.com/music/photo/album_300/%s/300_albumpic_%s_0.jpg", String.valueOf(albumid % 100), String.valueOf(albumid));
-        String song_id = song_info.getString("songmid");
+        this.lrc = "暂无";
+
         if (song_info.getInteger("sizeflac") != 0) {
-            this.best_quality = "flac";
+            this.quality = "flac";
         } else if (song_info.getInteger("sizeape") != 0) {
-            this.best_quality = "ape";
+            this.quality = "ape";
         } else if (song_info.getInteger("size320") != 0) {
-            this.best_quality = "320";
+            this.quality = "320";
         } else if (song_info.getInteger("size128") != 0) {
-            this.best_quality = "128";
-        } else this.best_quality = "无法获取";
+            this.quality = "128";
+        } else this.quality = "无法获取";
 
         JSONArray singer_json_list = song_info.getJSONArray("singer");
         StringBuilder tem_singer_name_list = new StringBuilder();
-
         tem_singer_name_list.append(((JSONObject) singer_json_list.getJSONObject(0)).getString("name"));
         for (int time = 1; time < singer_json_list.size(); time++) {
             tem_singer_name_list.append(' ');
@@ -67,13 +68,14 @@ class SongInfoByQQAPI extends SongInfo {
         this.singer = tem_singer_name_list.toString();
 
 
+        String song_id = song_info.getString("songmid");
+
         GetSongInfoJsonByQQAPI songinfo = new GetSongInfoJsonByQQAPI();
         JSONObject songinfoJson = songinfo.getVkey(song_id);
-
         try {
             String vkey = songinfoJson.getJSONObject("data").getJSONArray("items").getJSONObject(0).getString("vkey");
             if (!vkey.equals("")) {
-                this.best_quality_file = String.format("http://ws.stream.qqmusic.qq.com/C400%s.m4a?fromtag=0&guid=126548448&vkey=%s", song_id, vkey);
+                this.song_url = String.format("http://ws.stream.qqmusic.qq.com/C400%s.m4a?fromtag=0&guid=126548448&vkey=%s", song_id, vkey);
             }
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();

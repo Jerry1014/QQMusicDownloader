@@ -17,9 +17,12 @@ li {
     vertical-align: top;
 }
 
-.song_name {
+.song_name_album_name {
     display: block;
     margin: 10px 0 10px;
+}
+
+#song_name{
     line-height: 18px;
     font-size: 20px;
     font-weight: 400;

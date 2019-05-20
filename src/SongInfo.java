@@ -1,7 +1,8 @@
 public class SongInfo {
     String album_pic = null;
-    String best_quality_file = null;
-    String best_quality = null;
+    String album_name = null;
+    String song_url = null;
+    String quality = null;
     String song_name = null;
     String singer = null;
     String lrc = null;
@@ -10,12 +11,14 @@ public class SongInfo {
         return album_pic;
     }
 
-    public String getBest_quality_file() {
-        return best_quality_file;
+    public String getAlbum_name() { return album_name; }
+
+    public String getSong_url() {
+        return song_url;
     }
 
-    public String getBest_quality() {
-        return best_quality;
+    public String getQuality() {
+        return quality;
     }
 
     public String getSong_name() {
@@ -26,4 +29,5 @@ public class SongInfo {
         return singer;
     }
 
+    public String getLrc() { return lrc; }
 }

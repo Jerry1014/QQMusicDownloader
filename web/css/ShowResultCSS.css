@@ -36,7 +36,7 @@
     transform: translateY(2px);
 }
 
-.LastNextButton{
+.LastNextButton {
     display: inline-block;
     width: 100px; /* 宽度 */
     height: 40px; /* 高度 */
@@ -55,4 +55,8 @@
     color: black; /* 字体颜色 */
     font-size: 17px; /* 字体大小 */
     text-align: center
+}
+
+#Footer {
+    padding-inline-start: 30px;
 }
