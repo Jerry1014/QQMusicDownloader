@@ -55,10 +55,10 @@ li {
     border: 0;
     background-size: 40px auto;
     background-color: transparent;
-    background-image: url("/img/download.png");
+    background-image: url("../img/download.png");
     transition-duration: 0.4s;
 }
 
 .icon_download:hover {
-    background-image: url("/img/download_hover.png");
+    background-image: url("../img/download_hover.png");
 }
