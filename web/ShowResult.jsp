@@ -12,13 +12,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--version记录了最后一次对css文件作修改的时间，用于刷新浏览器的css缓存--%>
+<% String version = "1905211244"; %>
 <html>
 <head>
     <title>我把这世间的一切都放在这了</title>
 
-    <%--version记录了最后一次对css文件作修改的时间，用于刷新浏览器的css缓存--%>
-    <link rel="stylesheet" type="text/css" href="assets/waifu.css?version=1905201216"/>
-    <link rel="stylesheet" type="text/css" href="css/ShowResultCSS.css?version=1905202008"/>
+    <link rel="stylesheet" type="text/css" href="assets/waifu.css?version=<%=version%>"/>
+    <link rel="stylesheet" type="text/css" href="css/ShowResultCSS.css?version=<%=version%>"/>
 </head>
 <body>
 <header>
@@ -56,8 +57,8 @@
         <span class="fui-cross"></span>
     </div>
 </div>
-<script src="assets/waifu-tips.js"></script>
-<script src="assets/live2d.js"></script>
+<script src="assets/waifu-tips.js?version=<%=version%>"></script>
+<script src="assets/live2d.js?version=<%=version%>"></script>
 <script type="text/javascript">initModel("assets/")</script>
 
 <footer id="Footer">
