@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--version记录了最后一次对css文件作修改的时间，用于刷新浏览器的css缓存--%>
-<%  String version = "1905211528";
+<%  String version = "1905211705";
     application.setAttribute("version",version);%>
 <html>
 <head>
