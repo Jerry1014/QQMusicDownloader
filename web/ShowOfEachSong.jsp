@@ -17,5 +17,5 @@
         </div>
     </li>
     <%-- 注意！这里可能有style的优先级问题--%>
-    <link rel="stylesheet" type="text/css" href="css/ShowOfEachSongCSS.css?version=1905201216">
+    <link rel="stylesheet" type="text/css" href="css/ShowOfEachSongCSS.css?version=<%=version%>">
 </c:forEach>

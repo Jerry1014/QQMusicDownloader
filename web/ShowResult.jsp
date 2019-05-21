@@ -13,7 +13,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--version记录了最后一次对css文件作修改的时间，用于刷新浏览器的css缓存--%>
-<% String version = "1905211244"; %>
+<% String version = (String)application.getAttribute("version"); %>
 <html>
 <head>
     <title>我把这世间的一切都放在这了</title>
@@ -47,15 +47,6 @@
 <div class="waifu">
     <div class="waifu-tips"></div>
     <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
-    <div class="waifu-tool">
-        <span class="fui-home"></span>
-        <span class="fui-chat"></span>
-        <span class="fui-eye"></span>
-        <span class="fui-user"></span>
-        <span class="fui-photo"></span>
-        <span class="fui-info-circle"></span>
-        <span class="fui-cross"></span>
-    </div>
 </div>
 <script src="assets/waifu-tips.js?version=<%=version%>"></script>
 <script src="assets/live2d.js?version=<%=version%>"></script>
