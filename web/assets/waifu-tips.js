@@ -30,20 +30,10 @@ setInterval(function() { if (!getActed) ifActed(); else elseActed(); }, 1000);
 function initModel(waifuPath){
     
     if (waifuPath === undefined) waifuPath = '';
-    // var modelId = localStorage.getItem('modelId');
-    // var modelTexturesId = localStorage.getItem('modelTexturesId');
-
     var modelId = 5;
     var modelTexturesId = 1;
 
-    if (modelId == null) {
-        
-        /* 首次访问加载 指定模型 的 指定材质 */
-        
-        var modelId = 1;            // 模型 ID
-        var modelTexturesId = 53;    // 材质 ID
-        
-    } loadModel(modelId, modelTexturesId);
+    loadModel(modelId, modelTexturesId);
 	
 	$.ajax({
         cache: true,
