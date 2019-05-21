@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--version记录了最后一次对css文件作修改的时间，用于刷新浏览器的css缓存--%>
-<%  String version = "1905211705";
+<%  String version = "1905220058";
     application.setAttribute("version",version);%>
 <html>
 <head>
@@ -22,8 +22,7 @@
         <img src="img/music.png" alt="假装有一张图片">
     </div>
     <form id="searchinputform" action="${pageContext.request.contextPath}/S" method="post">
-        <label>
-            <select name="SelectedApi">
+        <label><select name="SelectedApi">
                 <option value="QQMusic">QQ音乐</option>
                 <option value="Test">测试用,还没做</option>
             </select>

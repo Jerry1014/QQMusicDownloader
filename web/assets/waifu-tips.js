@@ -19,8 +19,8 @@ String.prototype.render = function (context) {
     });
 };
 
-function initModel(waifuPath){
-    
+function initModel(waifuPath) {
+
     if (waifuPath === undefined) waifuPath = '';
     var modelId = 5;
     var modelTexturesId = 1;
@@ -28,9 +28,16 @@ function initModel(waifuPath){
     loadModel(modelId, modelTexturesId);
 }
 
-function loadModel(modelId, modelTexturesId){
+function loadModel(modelId, modelTexturesId) {
     localStorage.setItem('modelId', modelId);
     if (modelTexturesId === undefined) modelTexturesId = 0;
     localStorage.setItem('modelTexturesId', modelTexturesId);
-    loadlive2d('live2d', 'https://api.fghrsh.net/live2d/get/?id='+modelId+'-'+modelTexturesId, console.log('live2d','模型 '+modelId+'-'+modelTexturesId+' 加载完成'));
+
+    var curPath = window.document.location.href;
+    var pathName = window.document.location.pathname;
+    var pos = curPath.indexOf(pathName);
+    var path = curPath.substring(0, pos) + pathName.substring(0, pathName.substr(1).indexOf('/') + 1) + '/L?model_name=shizuku&texture_id=0';
+
+    loadlive2d('live2d', path, console.log('live2d', '加载模型 ' + path));
+    // loadlive2d('live2d', 'https://api.fghrsh.net/live2d/get/?id='+modelId+'-'+modelTexturesId, console.log('live2d','模型 '+modelId+'-'+modelTexturesId+' 加载完成'));
 }

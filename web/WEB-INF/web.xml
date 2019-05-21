@@ -11,4 +11,12 @@
         <servlet-name>Search</servlet-name>
         <url-pattern>/S</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>LoadLive2d</servlet-name>
+        <servlet-class>LoadLive2d</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoadLive2d</servlet-name>
+        <url-pattern>/L</url-pattern>
+    </servlet-mapping>
 </web-app>
