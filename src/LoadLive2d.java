@@ -89,8 +89,7 @@ public class LoadLive2d extends HttpServlet {
                 status_code = 2;
                 model_json.put("status_code", status_code);
                 model_json.put("status_str", e.toString());
-            } finally {
-                response.getWriter().println(model_json.toString());
+            } finally { response.getWriter().println(model_json.toString());
             }
         }
     }
