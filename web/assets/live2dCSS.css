@@ -1,4 +1,4 @@
-.waifu {
+.live2d_div {
     position: fixed;
     bottom: 0;
     right: 0;
@@ -8,16 +8,16 @@
     -webkit-transform: translateY(3px);
     transform: translateY(3px);
 }
-.waifu:hover {
+.live2d_div:hover {
     -webkit-transform: translateY(0);
     transform: translateY(0);
 }
 @media (max-width: 768px) {
-    .waifu {
+    .live2d_div {
         display: none;
     }
 }
-.waifu #live2d{
+.live2d_div #live2d{
     position: relative;
 }
 
