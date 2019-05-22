@@ -7,14 +7,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--version记录了最后一次对css文件作修改的时间，用于刷新浏览器的css缓存--%>
-<%  String version = "1905220058";
+<%  String version = "1905220942";
     application.setAttribute("version",version);%>
 <html>
 <head>
     <title>来搜吧，我这里什么歌都有</title>
 
     <link rel="stylesheet" type="text/css" href="css/indexCSS.css?version=<%=version%>"/>
-    <link rel="stylesheet" type="text/css" href="assets/waifu.css?version=<%=version%>"/>
+    <link rel="stylesheet" type="text/css" href="assets/live2dCSS.css?version=<%=version%>"/>
 </head>
 <body>
 <div id="main">
@@ -34,13 +34,12 @@
     </form>
 </div>
 
-<div class="waifu">
-    <div class="waifu-tips"></div>
+<div class="live2d_div">
     <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
 </div>
-<script src="assets/waifu-tips.js?version=<%=version%>"></script>
+<script src="assets/live2d_ini.js?version=<%=version%>"></script>
 <script src="assets/live2d.js?version=<%=version%>"></script>
-<script type="text/javascript">initModel("assets/")</script>
+<script type="text/javascript">initModel("./")</script>
 
 </body>
 </html>

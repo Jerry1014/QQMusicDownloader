@@ -18,7 +18,7 @@
 <head>
     <title>我把这世间的一切都放在这了</title>
 
-    <link rel="stylesheet" type="text/css" href="assets/waifu.css?version=<%=version%>"/>
+    <link rel="stylesheet" type="text/css" href="assets/live2dCSS.css?version=<%=version%>"/>
     <link rel="stylesheet" type="text/css" href="css/ShowResultCSS.css?version=<%=version%>"/>
 </head>
 <body>
@@ -44,11 +44,10 @@
     </c:choose>
 </div>
 
-<div class="waifu">
-    <div class="waifu-tips"></div>
+<div class="live2d_div">
     <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
 </div>
-<script src="assets/waifu-tips.js?version=<%=version%>"></script>
+<script src="assets/live2d_ini.js?version=<%=version%>"></script>
 <script src="assets/live2d.js?version=<%=version%>"></script>
 <script type="text/javascript">initModel("assets/")</script>
 
