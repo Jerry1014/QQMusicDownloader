@@ -6,7 +6,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetSongInfoJsonByQQAPI extends GetSongInfoJson {
+class GetSongInfoJsonByQQAPI extends GetSongInfoJson {
     // 歌曲信息请求设置
     private String request_url = "https://c.y.qq.com/soso/fcgi-bin/client_search_cp?aggr=1&cr=1&flag_qc=0&p=%s&n=%s&w=%s";
     private String referer_url = "https://y.qq.com/portal/profile.html";
@@ -27,11 +27,6 @@ public class GetSongInfoJsonByQQAPI extends GetSongInfoJson {
         JSONArray song_json_list = song_list_with_info.getJSONArray("list");
 
         return getList(song_json_list);
-    }
-
-    @Override
-    SongInfo parseJsonToSongInfo(JSONObject song_json) {
-        return null;
     }
 
     private static List getList(JSONArray song_json_list) throws IOException {

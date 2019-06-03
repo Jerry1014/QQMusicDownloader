@@ -13,8 +13,7 @@ abstract class GetSongInfoJson {
     String total_page_num = null;
     private int time_out = 5000;
 
-    abstract List getSongList(String keyword, String page_num, String ua) throws IOException;
-    abstract SongInfo parseJsonToSongInfo(JSONObject song_json);
+    abstract List getSongList(String keyword, String page_num, String ua) throws Exception;
 
     String request(URL url, String ua, String request_method, String referer_url) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -38,7 +37,6 @@ abstract class GetSongInfoJson {
     }
 
     String getTotal_page_num() {
-        assert total_page_num != null : "先通过getSongList得到歌曲信息才能使用";
         return total_page_num;
     }
 }

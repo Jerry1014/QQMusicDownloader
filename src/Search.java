@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class Search extends javax.servlet.http.HttpServlet {
@@ -32,7 +31,7 @@ public class Search extends javax.servlet.http.HttpServlet {
             String keyword_utf8 = URLEncoder.encode(keyword.replaceAll(" ", "+"), "UTF-8");
 
             // 将歌曲jsonarray转变为SongInfo List
-            List song_list = song_json_list.getSongList(keyword_utf8, page_num, request.getHeader("user_agent"));
+            List song_list = song_json_list.getAPIRespondInJson(keyword_utf8, page_num, request.getHeader("user_agent"));
 
             request.setAttribute("total_page_num", song_json_list.getTotal_page_num());
             request.setAttribute("selectedApi", selected_api);
