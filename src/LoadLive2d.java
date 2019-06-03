@@ -73,8 +73,7 @@ public class LoadLive2d extends HttpServlet {
 
                 String new_motions_str = model_json.getString("motions");
                 if (new_motions_str != null) {
-                    new_motions_str = new_motions_str.replaceAll("motions", model_path + "motions");
-                    new_motions_str = new_motions_str.replaceAll("sounds", model_path + "sounds");
+                    new_motions_str = new_motions_str.replaceAll("motions", model_path + "motions").replaceAll("sounds", model_path + "sounds");
                     model_json.put("motions", JSONObject.parseObject(new_motions_str));
                 }
 

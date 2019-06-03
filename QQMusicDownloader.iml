@@ -65,6 +65,5 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="jquery" level="application" />
   </component>
 </module>

@@ -1,3 +1,5 @@
+import com.alibaba.fastjson.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,8 +14,9 @@ abstract class GetSongInfoJson {
     private int time_out = 5000;
 
     abstract List getSongList(String keyword, String page_num, String ua) throws IOException;
+    abstract SongInfo parseJsonToSongInfo(JSONObject song_json);
 
-    String get_connection(URL url, String ua, String request_method, String referer_url) throws IOException {
+    String request(URL url, String ua, String request_method, String referer_url) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod(request_method);
         connection.setConnectTimeout(time_out);

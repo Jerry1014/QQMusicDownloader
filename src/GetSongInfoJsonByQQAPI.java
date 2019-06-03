@@ -17,7 +17,7 @@ public class GetSongInfoJsonByQQAPI extends GetSongInfoJson {
 
     List getSongList(String keyword, String page_num, String ua) throws IOException {
         String all_url = String.format(this.request_url, page_num, this.each_page_song_num, keyword);
-        String connection_response = get_connection(new URL(all_url), ua, request_method, referer_url);
+        String connection_response = request(new URL(all_url), ua, request_method, referer_url);
 
         JSONObject song_list_with_info = JSONObject.parseObject(connection_response.replaceAll
                 ("^callback\\(", "").replaceAll("\\)$", ""))
@@ -27,6 +27,11 @@ public class GetSongInfoJsonByQQAPI extends GetSongInfoJson {
         JSONArray song_json_list = song_list_with_info.getJSONArray("list");
 
         return getList(song_json_list);
+    }
+
+    @Override
+    SongInfo parseJsonToSongInfo(JSONObject song_json) {
+        return null;
     }
 
     private static List getList(JSONArray song_json_list) throws IOException {
@@ -40,7 +45,7 @@ public class GetSongInfoJsonByQQAPI extends GetSongInfoJson {
 
     JSONObject getVkey(String song_id) throws IOException {
         String best_quality_file_url = String.format(this.request_vkey_url, song_id, song_id);
-        String connection_response = get_connection(new URL(best_quality_file_url), "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36", request_method, referer_url);
+        String connection_response = request(new URL(best_quality_file_url), "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36", request_method, referer_url);
 
         return JSONObject.parseObject(connection_response);
     }

@@ -29,7 +29,7 @@ public class Search extends javax.servlet.http.HttpServlet {
                     break;
             }
             // url补全
-            String keyword_utf8 = URLEncoder.encode(keyword.replaceAll(" ", "+"), StandardCharsets.UTF_8);
+            String keyword_utf8 = URLEncoder.encode(keyword.replaceAll(" ", "+"), "UTF-8");
 
             // 将歌曲jsonarray转变为SongInfo List
             List song_list = song_json_list.getSongList(keyword_utf8, page_num, request.getHeader("user_agent"));

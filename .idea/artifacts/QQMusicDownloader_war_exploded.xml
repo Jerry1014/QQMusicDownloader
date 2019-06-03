@@ -7,6 +7,13 @@
         <element id="directory" name="classes">
           <element id="module-output" name="QQMusicDownloader" />
         </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/fastjson-1.2.57.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/taglibs-standard-compat-1.2.5.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/taglibs-standard-impl-1.2.5.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/taglibs-standard-jstlel-1.2.5.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/taglibs-standard-spec-1.2.5.jar" />
+        </element>
       </element>
     </root>
   </artifact>
