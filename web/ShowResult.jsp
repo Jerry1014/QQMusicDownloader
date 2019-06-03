@@ -49,7 +49,7 @@
 </div>
 <script src="assets/live2d_ini.js?version=<%=version%>"></script>
 <script src="assets/live2d.js?version=<%=version%>"></script>
-<script type="text/javascript">initModel("assets/")</script>
+<script type="text/javascript">initModel("./")</script>
 
 <footer id="Footer">
     <input id="LastPageButton" class="LastNextButton" onclick="lastPage()" type="button" value="上一页">
