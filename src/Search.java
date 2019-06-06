@@ -14,7 +14,7 @@ public class Search extends javax.servlet.http.HttpServlet {
 
         String keyword = request.getParameter("key_word");
         String page_num = request.getParameter("page_num");
-        boolean if_recommend = request.getParameter("if_recommend").equals("true");
+        boolean if_recommend = "true".equals(request.getParameter("if_recommend"));
         if (if_recommend || (keyword != null && keyword.length() > 0)) {
             // 请求qq音乐，得到json结果
             String selected_api = request.getParameter("SelectedApi");

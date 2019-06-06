@@ -65,8 +65,8 @@
         document.getElementById("LastPageButton").disabled = "true";
     }
     if (page_num === total_page_num) {
-        document.getElementById("NestPageButton").style.background = "#cccccc";
-        document.getElementById("NestPageButton").disabled = "true";
+        document.getElementById("NextPageButton").style.background = "#cccccc";
+        document.getElementById("NextPageButton").disabled = "true";
     }
     var key_word = document.getElementById("SearchKeyWord").value;
 
