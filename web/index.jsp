@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--version记录了最后一次对css文件作修改的时间，用于刷新浏览器的css缓存--%>
-<%  String version = "1905220942";
+<%  String version = "1906060935";
     application.setAttribute("version",version);%>
 <html>
 <head>
@@ -24,13 +24,16 @@
     <form id="searchinputform" action="${pageContext.request.contextPath}/S" method="post">
         <label><select name="SelectedApi">
                 <option value="QQMusic">QQ音乐</option>
-                <option value="Test">测试用,还没做</option>
             </select>
         </label>
 
         <label for="searchinput"><input id="searchinput" type="search" name="key_word"></label>
         <input id="searchinputbutton" type="submit" value="搜索">
         <input type="hidden" name="page_num" value="1">
+        <input type="hidden" id="if_recommend" name="if_recommend" value="false" >
+        <input type="image" id="if_recommend_img" src="img/recommend.png" alt="推荐" onclick="function x() {
+          document.getElementById('if_recommend').value = 'true';
+        }">
     </form>
 </div>
 

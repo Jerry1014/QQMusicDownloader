@@ -14,6 +14,7 @@ public class Search extends javax.servlet.http.HttpServlet {
 
         String keyword = request.getParameter("key_word");
         String page_num = request.getParameter("page_num");
+        boolean if_recommend = request.getParameter("if_recommend").equals("true");
         if (keyword != null && keyword.length() > 0) {
             // 请求qq音乐，得到json结果
             String selected_api = request.getParameter("SelectedApi");
@@ -33,9 +34,8 @@ public class Search extends javax.servlet.http.HttpServlet {
             // 将歌曲jsonarray转变为SongInfo List
             List song_list = null;
             try {
-               song_list = song_json_list.getSongList(keyword_utf8, page_num, request.getHeader("user_agent"));
-            }
-            catch (Exception a){
+                song_list = song_json_list.getSongList(keyword_utf8, page_num, request.getHeader("user_agent"),if_recommend);
+            } catch (Exception a) {
                 System.out.println(a.toString());
             }
             request.setAttribute("total_page_num", song_json_list.getTotal_page_num());

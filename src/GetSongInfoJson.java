@@ -13,7 +13,7 @@ abstract class GetSongInfoJson {
     String total_page_num = null;
     private int time_out = 5000;
 
-    abstract List getSongList(String keyword, String page_num, String ua) throws Exception;
+    abstract List getSongList(String keyword, String page_num, String ua, boolean if_recommend) throws Exception;
 
     String request(URL url, String ua, String request_method, String referer_url) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();

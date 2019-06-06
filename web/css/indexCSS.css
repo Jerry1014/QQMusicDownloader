@@ -20,6 +20,13 @@ body {
     top: 20px;
 }
 
+#if_recommend_img{
+    position: relative;
+    top: 11px;
+    height: 30px;
+    width: auto;
+}
+
 #searchinput {
     height: 30px;
     width: 400px;

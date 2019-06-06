@@ -14,8 +14,9 @@ class GetSongInfoJsonByQQAPI extends GetSongInfoJson {
 
     private String request_vkey_url = "https://c.y.qq.com/base/fcgi-bin/fcg_music_express_mobile3.fcg?format=json205361747&platform=yqq&cid=205361747&songmid=%s&filename=C400%s.m4a&guid=126548448";
 
-
-    List getSongList(String keyword, String page_num, String ua) throws IOException {
+    // 25 巅峰榜·中国新歌声 26 巅峰榜·热歌一周 27 巅峰榜·热歌30天 28 巅峰榜·网络歌曲 29 巅峰榜·影视金曲 30 巅峰榜·梦想的声音 32 巅峰榜·音乐人 33 全军出击·巅峰榜·歌手2018 34 巅峰榜·人气
+    // 35 QQ音乐巅峰分享榜 36 巅峰榜·K歌金曲
+    List getSongList(String keyword, String page_num, String ua, boolean if_recommend) throws IOException {
         String all_url = String.format(this.request_url, page_num, this.each_page_song_num, keyword);
         String connection_response = request(new URL(all_url), ua, request_method, referer_url);
 
@@ -23,16 +24,19 @@ class GetSongInfoJsonByQQAPI extends GetSongInfoJson {
                 ("^callback\\(", "").replaceAll("\\)$", ""))
                 .getJSONObject("data").getJSONObject("song");
         // 当each_page_song_num大于1000时，此处会产生bug
-        this.total_page_num = String.valueOf((int) (song_list_with_info.getInteger("totalnum") / Float.parseFloat(each_page_song_num) + 0.9999));
-        JSONArray song_json_list = song_list_with_info.getJSONArray("list");
+        this.total_page_num = String.valueOf(Math.ceil(song_list_with_info.getInteger("totalnum") / Float.parseFloat(each_page_song_num)));
+        JSONArray song_json_list;
+        if (if_recommend) song_json_list = song_list_with_info.getJSONArray("songlist");
+        else song_json_list = song_list_with_info.getJSONArray("list");
 
-        return getList(song_json_list);
+        return getList(song_json_list, if_recommend);
     }
 
-    private static List getList(JSONArray song_json_list) throws IOException {
+    private static List getList(JSONArray song_json_list, boolean if_recommend) throws IOException {
         List<SongInfoByQQAPI> song_list = new ArrayList<>();
         for (int time = 0; time < song_json_list.size(); time++) {
-            song_list.add(new SongInfoByQQAPI((JSONObject) song_json_list.getJSONObject(time)));
+            if(if_recommend) song_list.add(new SongInfoByQQAPI((JSONObject) song_json_list.getJSONObject(time).getJSONObject("data")));
+            else song_list.add(new SongInfoByQQAPI((JSONObject) song_json_list.getJSONObject(time)));
         }
         return song_list;
     }
