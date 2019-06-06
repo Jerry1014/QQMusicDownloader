@@ -15,7 +15,7 @@ public class Search extends javax.servlet.http.HttpServlet {
         String keyword = request.getParameter("key_word");
         String page_num = request.getParameter("page_num");
         boolean if_recommend = request.getParameter("if_recommend").equals("true");
-        if (if_recommend||(keyword != null && keyword.length() > 0)) {
+        if (if_recommend || (keyword != null && keyword.length() > 0)) {
             // 请求qq音乐，得到json结果
             String selected_api = request.getParameter("SelectedApi");
             GetSongInfoJson song_json_list;
@@ -34,16 +34,22 @@ public class Search extends javax.servlet.http.HttpServlet {
             // 将歌曲jsonarray转变为SongInfo List
             List song_list = null;
             try {
-                song_list = song_json_list.getSongList(keyword_utf8, page_num, request.getHeader("user_agent"),if_recommend);
+                song_list = song_json_list.getSongList(keyword_utf8, page_num, request.getHeader("user_agent"), if_recommend);
             } catch (Exception a) {
                 System.out.println(a.toString());
             }
-            request.setAttribute("total_page_num", song_json_list.getTotal_page_num());
-            request.setAttribute("selectedApi", selected_api);
-            request.setAttribute("keyword", keyword);
-            request.setAttribute("list", song_list);
-            request.setAttribute("page_num", page_num);
-            request.getRequestDispatcher("/ShowResult.jsp").forward(request, response);
+            try {
+                request.setAttribute("total_page_num", song_json_list.getTotal_page_num());
+                request.setAttribute("selectedApi", selected_api);
+                request.setAttribute("keyword", keyword);
+                request.setAttribute("list", song_list);
+                request.setAttribute("page_num", page_num);
+                request.getRequestDispatcher("/ShowResult.jsp").forward(request, response);
+            } catch (Exception a) {
+                String wrong_msg = a.toString();
+                System.out.println(wrong_msg);
+                response.sendRedirect("/index.jsp?" + wrong_msg);
+            }
         } else {
             // keyword为空的处理
             response.sendRedirect("./");
