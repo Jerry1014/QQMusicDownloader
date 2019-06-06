@@ -18,9 +18,8 @@
     <script>
         function show_msg() {
             var msg = "<%=request.getParameter("msg")%>";
-            if (msg) alert(msg);
+            if (msg!=='null') alert(msg);
         }
-
     </script>
 </head>
 <body onload="show_msg()">

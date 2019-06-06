@@ -25,14 +25,15 @@ class GetSongInfoJsonByQQAPI extends GetSongInfoJson {
 
         JSONObject song_list_with_info = JSONObject.parseObject(connection_response.replaceAll
                 ("^callback\\(", "").replaceAll("\\)$", ""));
-        // 当each_page_song_num大于1000时，此处会产生bug
         if (if_recommend)
             this.total_page_num = "1";
-        else
-            this.total_page_num = String.valueOf((int)Math.ceil(song_list_with_info.getInteger("totalnum") / Float.parseFloat(each_page_song_num)));
+        else {
+            song_list_with_info = song_list_with_info.getJSONObject("data").getJSONObject("song");
+            this.total_page_num = String.valueOf((int) Math.ceil(song_list_with_info.getInteger("totalnum") / Float.parseFloat(each_page_song_num)));
+        }
         JSONArray song_json_list;
         if (if_recommend) song_json_list = song_list_with_info.getJSONArray("songlist");
-        else song_json_list = song_list_with_info.getJSONObject("data").getJSONObject("song").getJSONArray("list");
+        else song_json_list = song_list_with_info.getJSONArray("list");
 
         return getList(song_json_list, if_recommend);
     }
