@@ -7,8 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--version记录了最后一次对css文件作修改的时间，用于刷新浏览器的css缓存--%>
-<%  String version = "1906060935";
-    application.setAttribute("version",version);%>
+<% String version = "1906060952";
+    application.setAttribute("version", version);%>
 <html>
 <head>
     <title>来搜吧，我这里什么歌都有</title>
@@ -23,18 +23,18 @@
     </div>
     <form id="searchinputform" action="${pageContext.request.contextPath}/S" method="post">
         <label><select name="SelectedApi">
-                <option value="QQMusic">QQ音乐</option>
-            </select>
+            <option value="QQMusic">QQ音乐</option>
+        </select>
         </label>
 
         <label for="searchinput"><input id="searchinput" type="search" name="key_word"></label>
         <input id="searchinputbutton" type="submit" value="搜索">
         <input type="hidden" name="page_num" value="1">
-        <input type="hidden" id="if_recommend" name="if_recommend" value="false" >
-        <input type="image" id="if_recommend_img" src="img/recommend.png" alt="推荐" onclick="function x() {
-          document.getElementById('if_recommend').value = 'true';
-        }">
+        <input type="hidden" id="if_recommend" name="if_recommend" value="false">
+        <input type="image" id="if_recommend_img" src="img/recommend.png" alt="推荐" onclick="
+        document.getElementById('if_recommend').value = 'true';">
     </form>
+
 </div>
 
 <div class="live2d_div">
