@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--version记录了最后一次对css文件作修改的时间，用于刷新浏览器的css缓存--%>
-<% String version = "1906061418";
+<% String version = "1906061440";
     application.setAttribute("version", version);%>
 <html>
 <head>
@@ -15,13 +15,15 @@
 
     <link rel="stylesheet" type="text/css" href="css/indexCSS.css?version=<%=version%>"/>
     <link rel="stylesheet" type="text/css" href="assets/live2dCSS.css?version=<%=version%>"/>
-
     <script>
-        var msg = <%=request.getParameter("msg")%>;
-        if (msg) alert(msg);
+        function show_msg() {
+            var msg = "<%=request.getParameter("msg")%>";
+            if (msg) alert(msg);
+        }
+
     </script>
 </head>
-<body>
+<body onload="show_msg()">
 <div id="main">
     <div id="main_pic">
         <img src="img/music.png" alt="假装有一张图片">

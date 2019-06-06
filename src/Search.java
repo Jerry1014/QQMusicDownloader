@@ -46,9 +46,8 @@ public class Search extends javax.servlet.http.HttpServlet {
                 request.setAttribute("page_num", page_num);
                 request.getRequestDispatcher("/ShowResult.jsp").forward(request, response);
             } catch (Exception a) {
-                String wrong_msg = a.toString();
-                System.out.println(wrong_msg);
-                response.sendRedirect("/index.jsp?msg=" + wrong_msg);
+                System.out.println(a.toString());
+                response.sendRedirect("./index.jsp?msg=" + "Something wrong");
             }
         } else {
             // keyword为空的处理
