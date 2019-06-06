@@ -48,7 +48,7 @@ public class Search extends javax.servlet.http.HttpServlet {
             } catch (Exception a) {
                 String wrong_msg = a.toString();
                 System.out.println(wrong_msg);
-                response.sendRedirect("/index.jsp?" + wrong_msg);
+                response.sendRedirect("/index.jsp?msg=" + wrong_msg);
             }
         } else {
             // keyword为空的处理

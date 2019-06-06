@@ -1,4 +1,3 @@
-<jsp:useBean id="msg" scope="request" type="java.lang.String"/>
 <%--
   Created by IntelliJ IDEA.
   User: Jerry
@@ -18,8 +17,8 @@
     <link rel="stylesheet" type="text/css" href="assets/live2dCSS.css?version=<%=version%>"/>
 
     <script>
-        var msg = ${msg};
-        if(msg) alert(msg);
+        var msg = <%=request.getParameter("msg")%>;
+        if (msg) alert(msg);
     </script>
 </head>
 <body>
