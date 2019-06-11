@@ -6,6 +6,8 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="QQMusicDownloader" />
+          <element id="library" level="application" name="jquery-3.3.1" />
+          <element id="library" level="application" name="player" />
         </element>
         <element id="directory" name="lib">
           <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/fastjson-1.2.57.jar" />

@@ -40,16 +40,14 @@
         <input type="image" id="if_recommend_img" src="img/recommend.png" alt="推荐" onclick="
         document.getElementById('if_recommend').value = 'true';">
     </form>
-
 </div>
 
 <div class="live2d_div">
 <%--    <canvas id="live2d" width="280" height="250" class="live2d"></canvas>--%>
-    <canvas id="live2d" width="420" height="375" class="live2d"></canvas>
+    <canvas id="live2d" width="308" height="275" class="live2d"></canvas>
 </div>
 <script src="assets/live2d_ini.js?version=<%=version%>"></script>
 <script src="assets/live2d.js?version=<%=version%>"></script>
 <script type="text/javascript">initModel("./")</script>
-
 </body>
 </html>
