@@ -10,7 +10,7 @@ if (typeof jQuery === 'undefined') {
 }
 
 //载入播放器，音乐地址等
-var lzxPlayerInit = function () {
+var PlayerInit = function (current_page_url) {
     //判断是否为移动客户端，影响歌词的展示
     var isPhone = false;
     if (navigator.userAgent.match(/(iPhone|iPod|Android|ios|Nokia|Black Berry|MIDP|Phone)/i)) {
@@ -20,8 +20,8 @@ var lzxPlayerInit = function () {
     //载入css
     if (!(typeof PlayerStyleLoaded !== "undefined" && PlayerStyleLoaded)) {
         var head = $("head"), PlayerStyleLoaded = true;
-        head.append('<link rel="stylesheet" type="text/css" href="../css/player.css">');
-        head.append('<link rel="stylesheet" type="text/css" href="../css/font-awesome.css">');
+        head.append('<link rel="stylesheet" type="text/css" href="'+current_page_url+'css/player.css?version=2">');
+        head.append('<link href="https://libs.baidu.com/fontawesome/4.2.0/css/font-awesome.css" rel="stylesheet" type="text/css">');
     }
 
     // 判断是否已经加载
@@ -46,7 +46,7 @@ var lzxPlayerInit = function () {
 
     //添加向html中添加播放器的标签
     $("body").append('' +
-        '<div id="lzxPlayer">\n' +
+        '<div id="Player">\n' +
         '    <div class="player">\n' +
         '        <canvas class="blur-img" width="365" height="155" id="canvas">您的浏览器不支持canvas，请更换高级版的浏览器！</canvas>\n' +
         '        <div class="blur-img">\n' +
@@ -154,16 +154,16 @@ var lzxPlayerInit = function () {
         '        <i class="fa fa-angle-right" style="margin-top: 20px;"></i>\n' +
         '    </div>\n' +
         '</div>\n' +
-        '<div id="lzxTips"></div>\n' +
-        '<div id="lzxLrc"></div>');
+        '<div id="Tips"></div>\n' +
+        '<div id="Lrc"></div>');
 
     // 全局主色
     mainColor = '0,0,0';
 
     var audio = new Audio(),
-        $player = $('#lzxPlayer'),
-        $tips = $('#lzxTips'),
-        $lk = $('#lzxKsc,#lzxLrc'),
+        $player = $('#Player'),
+        $tips = $('#Tips'),
+        $lk = $('#Ksc,#Lrc'),
         $switchPlayer = $('.switch-player', $player),
         $btns = $('.status', $player),
         $songName = $('.song', $player),
@@ -187,7 +187,7 @@ var lzxPlayerInit = function () {
         cur = 'current',
         ycgeci = true,
         first = 1,
-        volume = $.cookie('lzx_player_volume') ? $.cookie('lzx_player_volume') : '0.666',
+        volume = $.cookie('_player_volume') ? $.cookie('_player_volume') : '0.666',
         albumId = 0,
         songId = 0,
         songTotal = 0,
@@ -212,7 +212,7 @@ var lzxPlayerInit = function () {
         };
 
     if (isPhone) {
-        $('#lzxLrc').addClass('phone');
+        $('#Lrc').addClass('phone');
         $player.addClass('phone');
         $(".new-volume", $player).hide();
     }
@@ -229,7 +229,7 @@ var lzxPlayerInit = function () {
     $player_infos_lyric.html('<i class="fa fa-times-circle"></i> 歌词未载入');
 
     // 播放器重载前的清理
-    window.lzxPlayerReload = function () {
+    window.PlayerReload = function () {
         try {
             clearInterval(cicleTime);
         } catch (e) {
@@ -242,14 +242,14 @@ var lzxPlayerInit = function () {
             clearInterval(dogInterval);
         } catch (e) {
         }
-        $("#lzxPlayer").remove();
-        $("#lzxLrc").remove();
-        $("#lzxTips").remove();
+        $("#Player").remove();
+        $("#Lrc").remove();
+        $("#Tips").remove();
         audio.pause();
     };
 
     //音乐播放控制
-    var lzxMedia = {
+    var Media = {
         play: function () {
             $cover.addClass('coverplay');
             $player.addClass('playing');
@@ -282,8 +282,8 @@ var lzxPlayerInit = function () {
                 }
             }, 800);
             if (hasLrc) {
-                lrcTime = setInterval(lzxLrc.lrc.play, 500);
-                $('#lzxLrc').addClass('show');
+                lrcTime = setInterval(Lrc.lrc.play, 500);
+                $('#Lrc').addClass('show');
                 $('.switch-down').css('right', '65px');
                 $('.switch-ksclrc').show()
             }
@@ -294,23 +294,23 @@ var lzxPlayerInit = function () {
             $('.switch-ksclrc').hide();
             $('.switch-down').css('right', '35px');
             if (hasLrc) {
-                lzxLrc.lrc.hide()
+                Lrc.lrc.hide()
             }
         },
         error: function () {
             clearInterval(cicleTime);
             $player.removeClass('playing');
-            lzxTips.show(songSheetList[albumId].songNames[songId] + ' - 资源获取失败！尝试获取下一首...');
-            lzxMedia.next();
+            Tips.show(songSheetList[albumId].songNames[songId] + ' - 资源获取失败！尝试获取下一首...');
+            Media.next();
         },
         seeking: function () {
-            lzxTips.show('加载中...')
+            Tips.show('加载中...')
         },
         volumechange: function () {
             var vol = window.parseInt(audio.volume * 100);
             $('.progress2', $volumeSlider).height(vol + '%');
-            lzxTips.show('音量：' + vol + '%');
-            $.cookie("lzx_player_volume", audio.volume);
+            Tips.show('音量：' + vol + '%');
+            $.cookie("_player_volume", audio.volume);
         },
         getInfos: function (id) {
             $cover.removeClass('coverplay');
@@ -325,36 +325,36 @@ var lzxPlayerInit = function () {
         },
         next: function () {
             clearInterval(cicleTime);
-            random ? lzxMedia.getInfos(window.parseInt(Math.random() * songTotal))
-                : lzxMedia.getInfos(lzxMedia.getSongId(songId + 1));
+            random ? Media.getInfos(window.parseInt(Math.random() * songTotal))
+                : Media.getInfos(Media.getSongId(songId + 1));
         },
         prev: function () {
             clearInterval(cicleTime);
-            random ? lzxMedia.getInfos(window.parseInt(Math.random() * songTotal))
-                : lzxMedia.getInfos(lzxMedia.getSongId(songId - 1));
+            random ? Media.getInfos(window.parseInt(Math.random() * songTotal))
+                : Media.getInfos(Media.getSongId(songId - 1));
         }
     };
-    var lzxTipsTime = null;
-    var lzxTips = {
+    var TipsTime = null;
+    var Tips = {
         show: function (cont) {
-            clearTimeout(lzxTipsTime);
-            $('#lzxTips').text(cont).addClass('show');
+            clearTimeout(TipsTime);
+            $('#Tips').text(cont).addClass('show');
             this.hide()
         },
         hide: function () {
-            lzxTipsTime = setTimeout(function () {
-                $('#lzxTips').removeClass('show');
+            TipsTime = setTimeout(function () {
+                $('#Tips').removeClass('show');
             }, 3000)
         }
     };
     //给audio添加监听事件  执行相应的函数
-    audio.addEventListener('play', lzxMedia.play, false);
-    audio.addEventListener('pause', lzxMedia.pause, false);
-    audio.addEventListener('ended', lzxMedia.next, false);
-    audio.addEventListener('playing', lzxMedia.playing, false);
-    audio.addEventListener('volumechange', lzxMedia.volumechange, false);
-    audio.addEventListener('error', lzxMedia.error, false);
-    audio.addEventListener('seeking', lzxMedia.seeking, false);
+    audio.addEventListener('play', Media.play, false);
+    audio.addEventListener('pause', Media.pause, false);
+    audio.addEventListener('ended', Media.next, false);
+    audio.addEventListener('playing', Media.playing, false);
+    audio.addEventListener('volumechange', Media.volumechange, false);
+    audio.addEventListener('error', Media.error, false);
+    audio.addEventListener('seeking', Media.seeking, false);
 
     //侧边按钮点击事件
     $switchPlayer.click(function () {
@@ -365,38 +365,38 @@ var lzxPlayerInit = function () {
         hasgeci = false;
         $("li", $albumList).eq(albumId).addClass(cur).find(".artist").html("暂停播放 > ").parent().siblings()
             .removeClass(cur).find(".artist").html("").parent();
-        lzxTips.show('暂停播放 - ' + songSheetList[albumId].songNames[songId]);
+        Tips.show('暂停播放 - ' + songSheetList[albumId].songNames[songId]);
         $cover.removeClass('coverplay');
         audio.pause();
         setTimeout(function () {
-            lzxTips.show("播放器下次访问将自动暂停");
+            Tips.show("播放器下次访问将自动暂停");
         }, 4000);
         $.cookie("auto_playre", "no");
     });
     //音乐播放事件
     $('.play', $player).click(function () {
         hasgeci = true;
-        $('#lzxLrc,#lzxKsc').show();
+        $('#Lrc,#Ksc').show();
         $("li", $albumList).eq(albumId).addClass(cur).find(".artist").html("当前播放 > ").parent().siblings()
             .removeClass(cur).find(".artist").html("").parent();
         startPlay();
         setTimeout(function () {
-            lzxTips.show("播放器下次访问将自动播放");
+            Tips.show("播放器下次访问将自动播放");
         }, 4000);
         $.cookie("auto_playre", "yes");
     });
     //上一首事件
     $('.prev', $player).click(function () {
         hasgeci = true;
-        $('#lzxLrc,#lzxKsc').show();
-        lzxMedia.prev();
+        $('#Lrc,#Ksc').show();
+        Media.prev();
         $.cookie("auto_playre", "yes");
     });
     //下一首事件
     $('.next', $player).click(function () {
         hasgeci = true;
-        $('#lzxLrc,#lzxKsc').show();
-        lzxMedia.next();
+        $('#Lrc,#Ksc').show();
+        Media.next();
         $.cookie("auto_playre", "yes");
     });
     //随机播放按钮事件
@@ -404,7 +404,7 @@ var lzxPlayerInit = function () {
         $(this).addClass(cur);
         $('.loop', $player).removeClass(cur);
         random = true;
-        lzxTips.show('随机播放');
+        Tips.show('随机播放');
         $player_infos_play_mode.html('<i class="random fa fa-random current"></i> 随机播放');
         $.cookie("random_play", true)
     });
@@ -413,7 +413,7 @@ var lzxPlayerInit = function () {
         $(this).addClass(cur);
         $('.random', $player).removeClass(cur);
         random = false;
-        lzxTips.show('顺序播放');
+        Tips.show('顺序播放');
         $player_infos_play_mode.html('<i class="loop fa fa-retweet"></i> 顺序播放');
         $.cookie("random_play", false)
     });
@@ -513,14 +513,14 @@ var lzxPlayerInit = function () {
     //打开关闭歌词显示
     $('.switch-ksclrc').click(function () {
         $player.toggleClass('ksclrc');
-        $('#lzxLrc').toggleClass('hide');
-        $('#lzxKsc').toggleClass('hidePlayer');
-        if (!$('#lzxLrc').hasClass('hide')) {
+        $('#Lrc').toggleClass('hide');
+        $('#Ksc').toggleClass('hidePlayer');
+        if (!$('#Lrc').hasClass('hide')) {
             ycgeci = true;
             if (hasLrc) {
                 $player_infos_lyric.html('<i class="fa fa-check-circle"></i> 歌词开启')
             }
-            lzxTips.show('开启歌词显示');
+            Tips.show('开启歌词显示');
             songFrom33 = '开启';
             $player_controls_switch_of_lrc.html('<i class="fa fa-toggle-on" title="关闭歌词"></i>');
         } else {
@@ -528,14 +528,14 @@ var lzxPlayerInit = function () {
             if (hasLrc) {
                 $player_infos_lyric.html('<i class="fa fa-times-circle"></i> 歌词关闭');
             }
-            lzxTips.show('歌词显示已关闭');
+            Tips.show('歌词显示已关闭');
             songFrom33 = '关闭';
             $player_controls_switch_of_lrc.html('<i class="fa fa-toggle-off" title="打开歌词"></i>')
         }
         musicTooltip();
     });
     //播放列表设置
-    lzxPlayer.playList = {
+    Player.playList = {
         creat: {
             album: function () {
                 $('.musicheader', $albumList).html('播放列表');
@@ -550,14 +550,14 @@ var lzxPlayerInit = function () {
 
                 $("li", $albumList).click(function () {
                     var a = $(this).index();
-                    $(this).hasClass(cur) ? lzxPlayer.playList.creat.song(a, true)
-                        : lzxPlayer.playList.creat.song(a, false);
+                    $(this).hasClass(cur) ? Player.playList.creat.song(a, true)
+                        : Player.playList.creat.song(a, false);
                     $player.addClass("showSongList")
                 });
                 songTotal = songSheetList[albumId].songIds.length;
 
-                random ? lzxMedia.getInfos(window.parseInt(Math.random() * songTotal))
-                    : lzxMedia.getInfos(lzxMedia.getSongId(0));
+                random ? Media.getInfos(window.parseInt(Math.random() * songTotal))
+                    : Media.getInfos(Media.getSongId(0));
 
             },
             song: function (id, isThisAlbum) {
@@ -580,25 +580,25 @@ var lzxPlayerInit = function () {
                 }
                 $('li', $songList).click(function () {
                     hasgeci = true;
-                    $('#lzxLrc,#lzxKsc').show();
+                    $('#Lrc,#Ksc').show();
                     albumId = id;
                     if ($(this).hasClass(cur)) {
-                        lzxTips.show('正在播放 - '
+                        Tips.show('正在播放 - '
                             + songSheetList[albumId].songNames[songId].replace(songId + 1 + '#', ''))
                     } else {
                         $.cookie("auto_playre", "yes");
                         songId = $(this).index();
-                        lzxMedia.getInfos(songId);
+                        Media.getInfos(songId);
                     }
                 })
             }
         }
     };
-    var lzxLrc = {
+    var Lrc = {
         load: function () {
-            lzxLrc.lrc.hide();
+            Lrc.lrc.hide();
             hasLrc = false;
-            $('#lzxLrc,#lzxKsc').html('');
+            $('#Lrc,#Ksc').html('');
             setTimeout(function () {
                 if (hasgeci) {
                     $player_infos_lyric.html('<i class="fa fa-check-circle"></i> 歌词' + songFrom33)
@@ -621,12 +621,12 @@ var lzxPlayerInit = function () {
                         } else {
                             if (lrcstr.indexOf('[00') >= 0) {
                                 setTimeout(function () {
-                                        if (!$('#lzxLrc').hasClass('hide')) {
+                                        if (!$('#Lrc').hasClass('hide')) {
                                             songFrom44 = ' - 歌词获取成功!'
                                         } else {
                                             songFrom44 = ' - 歌词已关闭！'
                                         }
-                                        lzxLrc.lrc.format(lrcstr)
+                                        Lrc.lrc.format(lrcstr)
                                     },
                                     500)
                             } else {
@@ -665,31 +665,31 @@ var lzxPlayerInit = function () {
                     var timer = formatTime(lrcCont[i]);
                     lrcTimeLine.push(timer);
                     if (i == 1) {
-                        lrcLine += '<li class="lzxLrc' + timer + ' current" style="color:rgba(' + mainColor + ',1)">' + lrcCont[i + 1] + '</li>'
+                        lrcLine += '<li class="Lrc' + timer + ' current" style="color:rgba(' + mainColor + ',1)">' + lrcCont[i + 1] + '</li>'
                     } else {
-                        lrcLine += '<li class="lzxLrc' + timer + '">' + lrcCont[i + 1] + '</li>'
+                        lrcLine += '<li class="Lrc' + timer + '">' + lrcCont[i + 1] + '</li>'
                     }
                 }
-                $('#lzxLrc').html('<ul>' + lrcLine + '</ul>');
+                $('#Lrc').html('<ul>' + lrcLine + '</ul>');
                 setTimeout(function () {
                         if (audio.paused) {
                             $('.switch-ksclrc').hide();
                             $('.switch-down').css('right', '35px');
                         } else {
-                            $('#lzxLrc').addClass('show')
+                            $('#Lrc').addClass('show')
                         }
                     },
                     500);
-                lrcTime = setInterval(lzxLrc.lrc.play, 500)
+                lrcTime = setInterval(Lrc.lrc.play, 500)
             },
             play: function () {
                 var timeNow = Math.round(audio.currentTime);
                 if ($.inArray(timeNow, lrcTimeLine) > 0) {
-                    var $lineNow = $('.lzxLrc' + timeNow);
+                    var $lineNow = $('.Lrc' + timeNow);
                     if (!$lineNow.hasClass(cur)) {
                         $lineNow.css('color', 'rgba(' + mainColor + ',1)');
                         $lineNow.addClass(cur).siblings().removeClass(cur).css('color', '');
-                        $('#lzxLrc').animate({
+                        $('#Lrc').animate({
                             scrollTop: lrcHeight * $lineNow.index()
                         });
                     }
@@ -699,7 +699,7 @@ var lzxPlayerInit = function () {
             },
             hide: function () {
                 clearInterval(lrcTime);
-                $('#lzxLrc').removeClass('show')
+                $('#Lrc').removeClass('show')
             }
         }
     };
@@ -729,7 +729,7 @@ var lzxPlayerInit = function () {
             "albumCovers": ['http://imgcache.qq.com/music/photo/album_300/26/300_albumpic_31526_0.jpg'],
             "lrc": ['']
         });
-        lzxPlayer.playList.creat.album()
+        Player.playList.creat.album()
     }
     startmusic();
     if (playerWidth !== -1) {
@@ -766,26 +766,26 @@ var lzxPlayerInit = function () {
             $player_infos_play_mode.html('<i class="loop fa fa-retweet"></i> 顺序播放');
         }
     }
-    if ($.cookie("lzx_player_volume") == '0.666') {
+    if ($.cookie("_player_volume") == '0.666') {
         volume = (defaultVolume / 100);
         audio.volume = volume;
     }
     // 防止百分百音量无触发事件
-    lzxMedia.volumechange();
+    Media.volumechange();
     albumId = defaultAlbum - 1;
     if (showLrc == 0) {
         //隐藏歌词
-        $('#lzxLrc').addClass('hide');
+        $('#Lrc').addClass('hide');
         ycgeci = false;
         if (hasLrc) {
             $player_infos_lyric.html('<i class="fa fa-times-circle"></i> 歌词关闭');
         }
-        lzxTips.show('歌词显示已关闭');
+        Tips.show('歌词显示已关闭');
         songFrom33 = '关闭';
         $player_controls_switch_of_lrc.html('<i class="fa fa-toggle-off" title="打开歌词"></i>')
     }
     if (showGreeting == 1) {
-        lzxTips.show(greeting);
+        Tips.show(greeting);
     }
 
     // 喂狗
@@ -863,7 +863,7 @@ var lzxPlayerInit = function () {
         coverImg.error = function () {
             coverImg.src = '../img/album_none.png';
             setTimeout(function () {
-                    lzxTips.show(songSheetList[albumId].songNames[songId] + ' - 专辑图片获取失败！')
+                    Tips.show(songSheetList[albumId].songNames[songId] + ' - 专辑图片获取失败！')
                 },
                 4000)
         };
@@ -875,7 +875,7 @@ var lzxPlayerInit = function () {
                 $(".blur-img").remove();
             }
         }
-        lzxLrc.load(); //加载歌词
+        Lrc.load(); //加载歌词
 
         //通过修改此处和startPlay()实现播放的控制
         if (first == 1) {
@@ -883,7 +883,7 @@ var lzxPlayerInit = function () {
             if (autoPlayer == 1 && ($.cookie("auto_playre") == null || $.cookie("auto_playre") === "yes")) {
                 startPlay()
             } else {
-                lzxTips.show('播放器自动暂停');
+                Tips.show('播放器自动暂停');
                 $cover.removeClass('coverplay');
                 audio.pause();
             }
@@ -898,19 +898,19 @@ var lzxPlayerInit = function () {
             if (scrollTop + windowHeight == scrollHeight) {
                 if (hasgeci && ycgeci) {
                     $player.addClass('ksclrc');
-                    $('#lzxLrc').addClass('hide');
-                    $('#lzxKsc').addClass('hidePlayer');
+                    $('#Lrc').addClass('hide');
+                    $('#Ksc').addClass('hidePlayer');
                     $player_infos_lyric.html('<i class="fa fa-times-circle"></i> 歌词隐藏');
                     $player_controls_switch_of_lrc.html('<i class="fa fa-toggle-off" title="歌词隐藏"></i>');
                     if (hasLrc) {
-                        lzxTips.show('歌词自动隐藏')
+                        Tips.show('歌词自动隐藏')
                     }
                 }
             } else {
                 if (hasgeci && ycgeci) {
                     $player.removeClass('ksclrc');
-                    $('#lzxLrc').removeClass('hide');
-                    $('#lzxKsc').removeClass('hidePlayer');
+                    $('#Lrc').removeClass('hide');
+                    $('#Ksc').removeClass('hidePlayer');
                     if (hasLrc) {
                         $player_infos_lyric.html('<i class="fa fa-check-circle"></i> 歌词开启')
                     }
@@ -922,7 +922,7 @@ var lzxPlayerInit = function () {
     }
 
     function startPlay() {
-        lzxTips.show('开始从' + songFrom55 + '播放 - ' + songSheetList[albumId].songNames[songId]);
+        Tips.show('开始从' + songFrom55 + '播放 - ' + songSheetList[albumId].songNames[songId]);
         audio.play();
     }
 
@@ -956,7 +956,7 @@ var lzxPlayerInit = function () {
         if (isPhone) {
             return;
         }
-        $('#lzxPlayer span,#lzxPlayer i').each(function () {
+        $('#Player span,#Player i').each(function () {
             $('#tooltip').remove();
             if (this.title) {
                 var a = this.title;
@@ -982,4 +982,3 @@ var lzxPlayerInit = function () {
         });
     }
 };
-lzxPlayerInit();
