@@ -1783,7 +1783,7 @@ var lzxPlayerInit = function () {
     lzxPlayer.playList = {
         creat: {
             album: function () {
-                $('.musicheader', $albumList).html('播放历史');
+                $('.musicheader', $albumList).html('播放列表');
                 var albumTotal = songSheetList.length,
                     albumList = '';
                 for (var c = 0; c < albumTotal; c++) {
@@ -1960,6 +1960,22 @@ var lzxPlayerInit = function () {
         showGreeting = 0, defaultAlbum = 1, siteName = 'Jerry', background = 1, playerWidth = -1, coverWidth = -1,
         showNotes = 1, autoPopupPlayer = -1;
     var songSheetList = []
+    function startmusic(){
+        //此处的push为设置用，实际使用时应当由参数传入
+        songSheetList.push({
+            "songSheetName": "test",
+            "author": "test",
+            "songIds": ['http://ws.stream.qqmusic.qq.com/C400004EzHKM2jXY9i.m4a?fromtag=0&guid=126548448&vkey=E376F4C8AB20BC8116C3FA51BA94150FBE0F794A1F0B59022254A59B2CA75472099C73477359D972B211D0116601C5869CC910132C564915'],
+            "songNames": ['红玫瑰'],
+            "songTypes": ['108242'],
+            "albumNames": ['认了吧'],
+            "artistNames": ['陈奕迅'],
+            "albumCovers": ['http://imgcache.qq.com/music/photo/album_300/26/300_albumpic_31526_0.jpg'],
+            "lrc": ['']
+        })
+        lzxPlayer.playList.creat.album()
+    }
+    startmusic();
     if (playerWidth !== -1) {
         document.body.style.setProperty('--player-width', playerWidth + 'px');
     }
@@ -2015,95 +2031,6 @@ var lzxPlayerInit = function () {
     if (showGreeting == 1) {
         lzxTips.show(greeting);
     }
-    function startmusic(){
-        //此处的push为设置用，实际使用时应当由参数传入
-        songSheetList.push({
-            "songSheetName": "",
-            "author": "",
-            "songIds": [],
-            "songNames": [],
-            "songTypes": [],
-            "albumNames": [],
-            "artistNames": [],
-            "albumCovers": []
-        })
-        lzxPlayer.playList.creat.album()
-    }
-    //源
-    // $.ajax({
-    //     url: webURL + '/api/info?id=' + keyId,
-    //     type: 'GET',
-    //     dataType: 'script',
-    //     success: function () {
-    //         if (playerWidth !== -1) {
-    //             document.body.style.setProperty('--player-width', playerWidth + 'px');
-    //         }
-    //         if (coverWidth !== -1) {
-    //             document.body.style.setProperty('--cover-width', coverWidth + 'px');
-    //         }
-    //         if (showNotes !== 1) {
-    //             $(".status .note", $player).hide()
-    //         }
-    //         if (autoPopupPlayer !== -1) {
-    //             setTimeout(function () {
-    //                 $player.addClass('show')
-    //             }, autoPopupPlayer * 1000)
-    //         }
-    //
-    //         if ($.cookie("random_play") != null) {
-    //             if ($.cookie("random_play") == "true") {
-    //                 $('.loop', $player).removeClass(cur);
-    //                 $('.random', $player).addClass(cur);
-    //                 $player_infos_play_mode.html('<i class="random fa fa-random"></i> 随机播放');
-    //                 random = true;
-    //             } else {
-    //                 $('.loop', $player).addClass(cur);
-    //                 $('.random', $player).removeClass(cur);
-    //                 $player_infos_play_mode.html('<i class="loop fa fa-retweet"></i> 顺序播放');
-    //                 random = false;
-    //             }
-    //         } else {
-    //             if (randomPlayer != 1) {
-    //                 $('.loop', $player).addClass(cur);
-    //                 $('.random', $player).removeClass(cur);
-    //                 random = false;
-    //                 $player_infos_play_mode.html('<i class="loop fa fa-retweet"></i> 顺序播放');
-    //             }
-    //         }
-    //
-    //         if ($.cookie("lzx_player_volume") == '0.666') {
-    //             volume = (defaultVolume / 100);
-    //             audio.volume = volume;
-    //         }
-    //
-    //         // 防止百分百音量无触发事件
-    //         lzxMedia.volumechange();
-    //
-    //         albumId = defaultAlbum - 1;
-    //
-    //         if (showLrc == 0) {
-    //             //隐藏歌词
-    //             $('#lzxLrc').addClass('hide');
-    //
-    //             ycgeci = false;
-    //             if (hasLrc) {
-    //                 $player_infos_lyric.html('<i class="fa fa-times-circle"></i> 歌词关闭');
-    //             }
-    //             lzxTips.show('歌词显示已关闭');
-    //             songFrom33 = '关闭';
-    //             $player_controls_switch_of_lrc.html('<i class="fa fa-toggle-off" title="打开歌词"></i>')
-    //         }
-    //         if (showGreeting == 1) {
-    //             lzxTips.show(greeting);
-    //         }
-    //         setTimeout(function (args) {
-    //             lzxPlayer.playList.creat.album()
-    //         }, 500)
-    //     },
-    //     error: function (XMLHttpRequest, textStatus, errorThrown) {
-    //         lzxTips.show('歌曲列表获取失败!')
-    //     }
-    // });
 
     // 喂狗
     dogInterval = setInterval(function () {
@@ -2143,7 +2070,7 @@ var lzxPlayerInit = function () {
 
     //通过网易云的api获取歌曲，我要修改的也是这部分
     function netmusic() {
-        audio.src = webURL + "/api/musicUrl?songId=" + songSheetList[albumId].songIds[songId] + "&type=" + songSheetList[albumId].songTypes[songId];
+        audio.src = songSheetList[albumId].songIds[songId];
         $('.switch-down').show();
         $('.switch-down').html('<a class="down"><i class="fa fa-cloud-download" title="从' + songFrom55 + '下载：'
             + songSheetList[albumId].songNames[songId] + ' - ' + songSheetList[albumId].artistNames[songId] + '"></i></a>');
@@ -2165,6 +2092,7 @@ var lzxPlayerInit = function () {
         coverImg.onload = function () {
             $cover.removeClass('changing');
             $.ajax({
+                // 这个url存在的意义未知
                 url: webURL + '/api/mainColor',
                 type: 'GET',
                 dataType: 'script',
