@@ -17,42 +17,33 @@ var lzxPlayerInit = function () {
         isPhone = true
     }
 
-    // Test环境
-    //影响未知
-    var isTest = typeof lzxPlayerTest !== "undefined" && lzxPlayerTest;
-    var testKey = typeof lzxPlayerTestKey !== "undefined" ? lzxPlayerTestKey : null;
-    var styleLoaded = typeof lzxPlayerStyleLoaded !== "undefined" && lzxPlayerStyleLoaded;
+    // 是否已经载入了css
+    var styleLoaded = typeof PlayerStyleLoaded !== "undefined" && PlayerStyleLoaded;
 
-    if (!isTest) {
-        // 判断是否已经加载
-        var isLoad = localStorage.getItem("isLoad");
-        var lastFeed = localStorage.getItem("lastFeed");
-        isLoad = typeof isLoad === "undefined" ? false : isLoad === "true";
-        isLoad = isLoad && typeof lastFeed !== "undefined" && new Date().getTime() - parseInt(lastFeed) < 2000;
+    // 判断是否已经加载
+    var isLoad = localStorage.getItem("isLoad");
+    var lastFeed = localStorage.getItem("lastFeed");
+    isLoad = typeof isLoad === "undefined" ? false : isLoad === "true";
+    isLoad = isLoad && typeof lastFeed !== "undefined" && new Date().getTime() - parseInt(lastFeed) < 2000;
 
-        //禁止iframe嵌套 || 是否已加载
-        if (top.location !== self.location || isLoad) {
-            return
-        }
-        localStorage.setItem("isLoad", "true");
+    //禁止iframe嵌套 || 是否已加载
+    if (top.location !== self.location || isLoad) {
+        return
     }
+    localStorage.setItem("isLoad", "true");
 
-    // 如果测试环境 && 未指定testKey
-    if (isTest && testKey == null) {
-        return;
-    }
-
+    //！为保证分步精简中每一步的正确性，故先不删除此段，待所有使用到的地方删除完毕后再行删除
     //播放地址和播放key
     //webURL为域名
     var jsUrl = "https://music.caojiefeng.com/";
     var webURL = jsUrl.startsWith("http") ? jsUrl.substring(0, jsUrl.indexOf("/", 8)) : window.location.origin;
-    var keyId = isTest ? testKey : "29ae13009b6142b489f48b38e6a26d33";
+    var keyId = "29ae13009b6142b489f48b38e6a26d33";
 
     //载入css
     if (!styleLoaded) {
-        $("head").append('<link rel="stylesheet" type="text/css" href="' + webURL + '/player/css/player.css">');
-        $("head").append('<link href="https://libs.baidu.com/fontawesome/4.2.0/css/font-awesome.css" rel="stylesheet" type="text/css">');
-        lzxPlayerStyleLoaded = true;
+        var head = $("head"), PlayerStyleLoaded = true;
+        head.append('<link rel="stylesheet" type="text/css" href="../css/player.css">');
+        head.append('<link rel="stylesheet" type="text/css" href="../css/font-awesome.css">');
     }
 
     //添加向html中添加播放器的标签
@@ -416,7 +407,7 @@ var lzxPlayerInit = function () {
         $('.loop', $player).removeClass(cur);
         random = true;
         lzxTips.show('随机播放');
-        $player_infos_play_mode.html('<i class="random fa fa-random current"></i> 随机播放')
+        $player_infos_play_mode.html('<i class="random fa fa-random current"></i> 随机播放');
         $.cookie("random_play", true)
     });
     //顺序播放按钮事件
@@ -425,7 +416,7 @@ var lzxPlayerInit = function () {
         $('.random', $player).removeClass(cur);
         random = false;
         lzxTips.show('顺序播放');
-        $player_infos_play_mode.html('<i class="loop fa fa-retweet"></i> 顺序播放')
+        $player_infos_play_mode.html('<i class="loop fa fa-retweet"></i> 顺序播放');
         $.cookie("random_play", false)
     });
     //音量组件拖动事件
@@ -725,7 +716,7 @@ var lzxPlayerInit = function () {
     var autoPlayer = 0, randomPlayer = 0, defaultVolume = 75, showLrc = 1, greeting = '来啦，老弟',
         showGreeting = 0, defaultAlbum = 1, siteName = 'Jerry', background = 1, playerWidth = -1, coverWidth = -1,
         showNotes = 1, autoPopupPlayer = -1;
-    var songSheetList = []
+    var songSheetList = [];
     function startmusic(){
         //此处的push为设置用，实际使用时应当由参数传入
         songSheetList.push({
@@ -739,7 +730,7 @@ var lzxPlayerInit = function () {
             "artistNames": ['陈奕迅'],
             "albumCovers": ['http://imgcache.qq.com/music/photo/album_300/26/300_albumpic_31526_0.jpg'],
             "lrc": ['']
-        })
+        });
         lzxPlayer.playList.creat.album()
     }
     startmusic();
@@ -801,9 +792,7 @@ var lzxPlayerInit = function () {
 
     // 喂狗
     dogInterval = setInterval(function () {
-        if (!isTest) {
-            localStorage.setItem("lastFeed", new Date().getTime().toString());
-        }
+        localStorage.setItem("lastFeed", new Date().getTime().toString());
         // 检查css变量
         var currPlayerWidth = document.body.style.getPropertyValue('--player-width');
         if (typeof playerWidth != "undefined" && playerWidth !== -1 && currPlayerWidth != (playerWidth + 'px')) {
