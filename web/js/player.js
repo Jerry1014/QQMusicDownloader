@@ -17,8 +17,12 @@ var lzxPlayerInit = function () {
         isPhone = true
     }
 
-    // 是否已经载入了css
-    var styleLoaded = typeof PlayerStyleLoaded !== "undefined" && PlayerStyleLoaded;
+    //载入css
+    if (!(typeof PlayerStyleLoaded !== "undefined" && PlayerStyleLoaded)) {
+        var head = $("head"), PlayerStyleLoaded = true;
+        head.append('<link rel="stylesheet" type="text/css" href="../css/player.css">');
+        head.append('<link rel="stylesheet" type="text/css" href="../css/font-awesome.css">');
+    }
 
     // 判断是否已经加载
     var isLoad = localStorage.getItem("isLoad");
@@ -39,12 +43,6 @@ var lzxPlayerInit = function () {
     var webURL = jsUrl.startsWith("http") ? jsUrl.substring(0, jsUrl.indexOf("/", 8)) : window.location.origin;
     var keyId = "29ae13009b6142b489f48b38e6a26d33";
 
-    //载入css
-    if (!styleLoaded) {
-        var head = $("head"), PlayerStyleLoaded = true;
-        head.append('<link rel="stylesheet" type="text/css" href="../css/player.css">');
-        head.append('<link rel="stylesheet" type="text/css" href="../css/font-awesome.css">');
-    }
 
     //添加向html中添加播放器的标签
     $("body").append('' +
