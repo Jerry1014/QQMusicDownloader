@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--version记录了最后一次对css文件作修改的时间，用于刷新浏览器的css缓存--%>
-<% String version = "1906132149";
+<% String version = "1906132244";
     application.setAttribute("version", version);%>
 <html>
 <head>
@@ -15,19 +15,6 @@
 
     <link rel="stylesheet" type="text/css" href="css/indexCSS.css?version=<%=version%>"/>
     <link rel="stylesheet" type="text/css" href="assets/live2dCSS.css?version=<%=version%>"/>
-
-<%--    <!-- Your XlchPlayerKey -->--%>
-<%--    <script>XlchKey="e0mE8KAsot";</script>--%>
-<%--    <!-- font-awesome 4.2.0 -->--%>
-<%--    <link href="http://lib.baomitu.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">--%>
-<%--    <!-- JQuery 2.2.4 -->--%>
-<%--    <script src="http://lib.baomitu.com/jquery/2.2.4/jquery.min.js"></script>--%>
-<%--    <!-- JQuery-mousewheel 3.1.9 -->--%>
-<%--    <script src="http://lib.baomitu.com/jquery-mousewheel/3.1.9/jquery.mousewheel.min.js"></script>--%>
-<%--    <!-- Scrollbar -->--%>
-<%--    <script src="http://static.badapple.top/BadApplePlayer/js/scrollbar.js"></script>--%>
-<%--    <!-- BadApplePlayer -->--%>
-<%--    <script src="http://static.badapple.top/BadApplePlayer/Player.js"></script>--%>
 
     <script>
         function show_msg() {
@@ -65,6 +52,10 @@
 <script type="text/javascript">initModel("./")</script>
 
 <script src="js/jquery-3.4.1.min.js"></script>
+<!-- 以下三个插件，我也不知道是干嘛用的。。。 -->
+<script src="js/mousewheel_plugin.js"></script>
+<script src="js/scrollbar_plugin.js"></script>
+<script src="js/cookie_plugin.js"></script>
 <script src="js/player.js?version=<%=version%>"></script>
 </body>
 </html>
