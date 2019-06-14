@@ -2,12 +2,15 @@
  * 明月浩空免费版 -》 曹杰峰音乐播放器 -》 Jerry本地播放器
  * Jerry1014 于2019/06/13 二次开发 主要工作为
  * 将播放器修改为本地播放器，歌曲的播放地址，图片，歌词等由本地提供
-*/
+ */
 
 // 检查jQuery插件是否安装
 if (typeof jQuery === 'undefined') {
     throw new Error('请先加载jQuery插件！');
 }
+
+//歌单列表
+var songSheetList = [];
 
 //载入播放器，音乐地址等
 var PlayerInit = function (current_page_url) {
@@ -20,7 +23,7 @@ var PlayerInit = function (current_page_url) {
     //载入css
     if (!(typeof PlayerStyleLoaded !== "undefined" && PlayerStyleLoaded)) {
         var head = $("head"), PlayerStyleLoaded = true;
-        head.append('<link rel="stylesheet" type="text/css" href="'+current_page_url+'css/player.css?version=3">');
+        head.append('<link rel="stylesheet" type="text/css" href="' + current_page_url + 'css/player.css?version=3">');
         head.append('<link href="https://libs.baidu.com/fontawesome/4.2.0/css/font-awesome.css" rel="stylesheet" type="text/css">');
     }
 
@@ -38,10 +41,6 @@ var PlayerInit = function (current_page_url) {
 
     //！为保证分步精简中每一步的正确性，故先不删除此段，待所有使用到的地方删除完毕后再行删除
     //播放地址和播放key
-    //webURL为域名
-    var jsUrl = "https://music.caojiefeng.com/";
-    var webURL = jsUrl.startsWith("http") ? jsUrl.substring(0, jsUrl.indexOf("/", 8)) : window.location.origin;
-    var keyId = "29ae13009b6142b489f48b38e6a26d33";
 
 
     //添加向html中添加播放器的标签
@@ -159,6 +158,7 @@ var PlayerInit = function (current_page_url) {
 
     // 全局主色
     mainColor = '0,0,0';
+    font_color = "255,255,255";
 
     var audio = new Audio(),
         $player = $('#Player'),
@@ -179,7 +179,7 @@ var PlayerInit = function (current_page_url) {
         $volumeSlider = $('.volume-controls .slider', $player);
     $rateBuffered = $('.musicbottom .rate-buffered', $player);
     $rateSlider = $('.rate .progress', $player);
-        roundcolor = '#6c6971',
+    roundcolor = '#6c6971',
         lightcolor = '#81c300',
         cur = 'current',
         if_hide_lrc = true,
@@ -305,7 +305,6 @@ var PlayerInit = function (current_page_url) {
             $cover.removeClass('coverplay');
             songId = id;
             allmusic();
-            musictype = songSheetList[albumId].songTypes[songId];
             load_music();
         },
         getSongId: function (n) {
@@ -595,35 +594,24 @@ var PlayerInit = function (current_page_url) {
                 }
                 $('.switch-down').css('right', '65px');
                 $('.switch-ksclrc').show();
-                $.ajax({
-                    url: webURL + "/api/musicLyric?songId=" + songSheetList[albumId].songIds[songId] + "&type="
-                        + songSheetList[albumId].songTypes[songId],
-                    type: 'GET',
-                    dataType: 'script',
-                    success: function () {
-                        if (lrcstr == '') {
-                            $player_infos_lyric.html('<i class="fa fa-times-circle"></i> 暂无歌词');
-                            $('.switch-ksclrc').hide();
-                            $('.switch-down').css('right', '35px');
-                        } else {
-                            if (lrcstr.indexOf('[00') >= 0) {
-                                setTimeout(function () {
-                                        Lrc.lrc.format(lrcstr)
-                                    },
-                                    500)
-                            } else {
-                                $player_infos_lyric.html('<i class="fa fa-times-circle"></i> 暂无歌词');
-                                $('.switch-ksclrc').hide();
-                                $('.switch-down').css('right', '35px');
-                            }
-                        }
-                    },
-                    error: function () {
+                var lrcstr = songSheetList[albumId].lrc;
+                if (lrcstr == '') {
+                    $player_infos_lyric.html('<i class="fa fa-times-circle"></i> 暂无歌词');
+                    $('.switch-ksclrc').hide();
+                    $('.switch-down').css('right', '35px');
+                } else {
+                    if (lrcstr.indexOf('[00') >= 0) {
+                        setTimeout(function () {
+                                Lrc.lrc.format(lrcstr)
+                            },
+                            500)
+                    } else {
                         $player_infos_lyric.html('<i class="fa fa-times-circle"></i> 暂无歌词');
                         $('.switch-ksclrc').hide();
                         $('.switch-down').css('right', '35px');
                     }
-                })
+                }
+
             }, 50)
         },
         lrc: {
@@ -694,24 +682,6 @@ var PlayerInit = function (current_page_url) {
     var autoPlayer = 0, randomPlayer = 0, defaultVolume = 75, showLrc = 1, greeting = '来啦，老弟',
         showGreeting = 0, defaultAlbum = 1, siteName = 'Jerry', background = 1, playerWidth = -1, coverWidth = -1,
         showNotes = 1, autoPopupPlayer = -1;
-    var songSheetList = [];
-    function startmusic(){
-        //此处的push为设置用，实际使用时应当由参数传入
-        songSheetList.push({
-            "songSheetName": "test",
-            "author": "test",
-            "songSrcs": ['http://ws.stream.qqmusic.qq.com/C400004EzHKM2jXY9i.m4a?fromtag=0&guid=126548448&vkey=E376F4C8AB20BC8116C3FA51BA94150FBE0F794A1F0B59022254A59B2CA75472099C73477359D972B211D0116601C5869CC910132C564915'],
-            "songIds": ['108242'],
-            "songNames": ['红玫瑰'],
-            "songTypes": ['wy'],
-            "albumNames": ['认了吧'],
-            "artistNames": ['陈奕迅'],
-            "albumCovers": ['http://imgcache.qq.com/music/photo/album_300/26/300_albumpic_31526_0.jpg'],
-            "lrc": ['']
-        });
-        Player.playList.creat.album()
-    }
-    startmusic();
     if (playerWidth !== -1) {
         document.body.style.setProperty('--player-width', playerWidth + 'px');
     }
@@ -801,7 +771,7 @@ var PlayerInit = function (current_page_url) {
         return re
     }
 
-    //通过网易云的api获取歌曲，我要修改的也是这部分
+    //获取歌曲信息，我要修改的也是这部分
     function load_music() {
         audio.src = songSheetList[albumId].songSrcs[songId];
         $('.switch-down').show();
@@ -809,7 +779,6 @@ var PlayerInit = function (current_page_url) {
         $('.down').click(function () {
             window.open(audio.src, 'newwindow')
         });
-        //lrcurl = songSheetList[albumId].lyrics[songId];
         $songName.html('<span title="' + songSheetList[albumId].songNames[songId] + '">'
             + LimitStr(songSheetList[albumId].songNames[songId]) + '</span>');
         window.console.log(name + ' - 当前播放：' + songSheetList[albumId].songNames[songId] + ' - '
@@ -824,10 +793,8 @@ var PlayerInit = function (current_page_url) {
         coverImg.onload = function () {
             $cover.removeClass('changing');
             $.ajax({
-                // 这个url存在的意义未知
-                url: webURL + '/api/mainColor',
                 type: 'GET',
-                dataType: 'script',
+                dataType: 'text',
                 data: {
                     url: coverImg.src
                 },
@@ -961,3 +928,19 @@ var PlayerInit = function (current_page_url) {
         });
     }
 };
+
+function play_music() {
+    //此处的push为设置用，实际使用时应当由参数传入
+    songSheetList.push({
+        "songSheetName": "test",
+        "author": "test",
+        "songSrcs": ['http://ws.stream.qqmusic.qq.com/C400004EzHKM2jXY9i.m4a?fromtag=0&guid=126548448&vkey=E376F4C8AB20BC8116C3FA51BA94150FBE0F794A1F0B59022254A59B2CA75472099C73477359D972B211D0116601C5869CC910132C564915'],
+        "songIds": ['108242'],
+        "songNames": ['红玫瑰'],
+        "albumNames": ['认了吧'],
+        "artistNames": ['陈奕迅'],
+        "albumCovers": ['http://imgcache.qq.com/music/photo/album_300/26/300_albumpic_31526_0.jpg'],
+        "lrc": '[00:00.000] 作曲 : 林俊杰[00:00.113] 作词 : 孙燕姿[00:00.340]编曲：蔡政勋[00:01.340]制作人：吴剑泓[00:02.340]配唱制作：许环良[00:03.340]Music Arrangement & Keyboards：蔡政勋[00:04.340]Violin：Ng Yu-Ying[00:05.340]Cello：Lu Bing Xia[00:06.340]Background Vocal Arrangement：林俊杰[00:07.340]Background Vocals：林俊杰[00:08.340]Recorded at The Embassy (Beijing)/The Scape (Singapore)[00:09.340]Recorded by Billy Koh, Zennon Goh[00:10.340]Mixed at The Scape (Singapore)[00:11.340]Mixed by Zennon Goh[00:12.340]OP: Warner/Chappell Music Taiwan Ltd / Touch Music Publishing Pte Ltd., Compass[00:13.340]SP: Warner/Chappell Music Publishing Agency (Beijing) Ltd./北京大石版权音乐有限公司[00:14.340]ISRC TW-B67-10-05201[00:26.040]她静悄悄的来过[00:31.389]她慢慢带走承诺[00:37.009]只是最后的承诺[00:42.599]还是没有带走了寂寞[00:48.289]我们爱的没有错[00:54.590]只是美丽的独秀[00:58.139]太折磨[01:00.319]她说无所谓[01:05.229]只要能在夜里翻来覆去的时候有寄托[01:11.589]等不到天黑[01:13.540]烟火不会太完美[01:17.279]回忆烧成灰[01:19.169]还是等不到结尾[01:23.999]她曾说的无所谓[01:26.169]我怕一天一天被摧毁[01:33.419]等不到天黑[01:36.178]不敢凋谢的花蕾[01:40.400]绿叶在跟随[01:42.299]放开刺痛的滋味[01:45.499]今后不再怕天明[01:50.359]我想只是害怕清醒[02:24.390]她静悄悄的来过[02:30.080]她慢慢带走承诺[02:35.610]只是最后的承诺[02:40.950]还是没有带走了寂寞[02:47.300]我们爱的没有错[02:52.450]只是美丽的独秀[02:56.590]太折磨[02:59.490]她说无所谓[03:03.900]只要能在夜里翻来覆去的时候有寄托[03:11.060]等不到天黑[03:12.760]烟火不会太完美[03:16.400]回忆烧成灰[03:18.000]还是等不到结尾[03:21.860]她曾说的无所谓[03:24.770]我怕一天一天被摧毁[03:33.100]等不到天黑[03:35.400]不敢凋谢的花蕾[03:38.770]绿叶在跟随[03:40.720]放开刺痛的滋味[03:43.630]今后不再怕天明[03:49.360]我想只是害怕清醒[03:55.810]等不到天黑[03:58.000]烟火不会太完美[04:01.550]回忆烧成灰[04:03.580]还是等不到结尾[04:07.940]她曾说的无所谓[04:10.580]我怕一天一天被摧毁[04:18.800]等不到天黑[04:20.579]不敢凋谢的花蕾[04:24.070]绿叶在跟随[04:26.150]放开刺痛的滋味[04:29.120]今后不再怕天明[04:34.880]我想只是害怕清醒[04:41.630]不怕天明[04:46.080]我想只是害怕清醒'
+    });
+    Player.playList.creat.album()
+}

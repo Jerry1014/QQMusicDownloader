@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--version记录了最后一次对css文件作修改的时间，用于刷新浏览器的css缓存--%>
-<% String version = "1906141128";
+<% String version = "1906141423";
     application.setAttribute("version", version);%>
 <html>
 <head>
@@ -59,5 +59,6 @@
 <script src="js/cookie_plugin.js"></script>
 <script src="js/player.js?version=<%=version%>"></script>
 <script type="text/javascript">PlayerInit("<%=webApp_page%>");</script>
+<script type="text/javascript">play_music()</script>
 </body>
 </html>
