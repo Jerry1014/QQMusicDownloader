@@ -180,7 +180,6 @@ var PlayerInit = function (current_page_url) {
     $rateBuffered = $('.musicbottom .rate-buffered', $player);
     $rateSlider = $('.rate .progress', $player);
         songFrom44 = '',
-        songFrom55 = '',
         roundcolor = '#6c6971',
         lightcolor = '#81c300',
         cur = 'current',
@@ -315,7 +314,6 @@ var PlayerInit = function (current_page_url) {
             $cover.removeClass('coverplay');
             songId = id;
             allmusic();
-            songFrom55 = songFroms[songSheetList[albumId].songTypes[songId]];
             musictype = songSheetList[albumId].songTypes[songId];
             netmusic();
         },
@@ -918,7 +916,7 @@ var PlayerInit = function (current_page_url) {
     }
 
     function startPlay() {
-        Tips.show('开始从' + songFrom55 + '播放 - ' + songSheetList[albumId].songNames[songId]);
+        Tips.show('开始播放 - ' + songSheetList[albumId].songNames[songId]);
         audio.play();
     }
 
