@@ -290,8 +290,7 @@ var PlayerInit = function (current_page_url) {
         error: function () {
             clearInterval(cicleTime);
             $player.removeClass('playing');
-            Tips.show(songSheetList[albumId].songNames[songId] + ' - 资源获取失败！尝试获取下一首...');
-            Media.next();
+            Tips.show(songSheetList[albumId].songNames[songId] + ' - 资源获取失败');
         },
         seeking: function () {
             Tips.show('加载中...')
@@ -307,7 +306,7 @@ var PlayerInit = function (current_page_url) {
             songId = id;
             allmusic();
             musictype = songSheetList[albumId].songTypes[songId];
-            netmusic();
+            load_music();
         },
         getSongId: function (n) {
             return n >= songTotal ? 0 : n < 0 ? songTotal - 1 : n
@@ -490,6 +489,7 @@ var PlayerInit = function (current_page_url) {
             }
         }
     });
+
     //播放列表按钮点击事件
     $('.switch-playlist').click(function () {
         $player.toggleClass('showAlbumList')
@@ -499,6 +499,7 @@ var PlayerInit = function (current_page_url) {
     $('.song-list .musicheader,.song-list .fa-angle-right', $player).click(function () {
         $player.removeClass('showSongList')
     });
+
     //打开关闭歌词显示
     $('.switch-ksclrc').click(function () {
         $player.toggleClass('ksclrc');
@@ -801,7 +802,7 @@ var PlayerInit = function (current_page_url) {
     }
 
     //通过网易云的api获取歌曲，我要修改的也是这部分
-    function netmusic() {
+    function load_music() {
         audio.src = songSheetList[albumId].songSrcs[songId];
         $('.switch-down').show();
         $('.switch-down').html('<a class="down"><i class="fa fa-cloud-download" title="下载"></i></a>');
