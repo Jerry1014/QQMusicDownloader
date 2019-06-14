@@ -182,7 +182,7 @@ var PlayerInit = function (current_page_url) {
         roundcolor = '#6c6971',
         lightcolor = '#81c300',
         cur = 'current',
-        ycgeci = true,
+        if_hide_lrc = true,
         first = 1,
         volume = $.cookie('_player_volume') ? $.cookie('_player_volume') : '0.666',
         albumId = 0,
@@ -199,14 +199,7 @@ var PlayerInit = function (current_page_url) {
         lrcHeight = 40,
         lrcTime = null,
         lrcCont = '',
-        dogInterval = null,
-        songFroms = {
-            "wy": "网易音乐",
-            "kg": "酷狗音乐",
-            "qq": "QQ音乐",
-            "xm": "虾米音乐",
-            "local": "本地音乐"
-        };
+        dogInterval = null
 
     if (isPhone) {
         $('#Lrc').addClass('phone');
@@ -512,14 +505,14 @@ var PlayerInit = function (current_page_url) {
         $('#Lrc').toggleClass('hide');
         $('#Ksc').toggleClass('hidePlayer');
         if (!$('#Lrc').hasClass('hide')) {
-            ycgeci = true;
+            if_hide_lrc = true;
             if (hasLrc) {
                 $player_infos_lyric.html('<i class="fa fa-check-circle"></i> 歌词开启')
             }
             Tips.show('开启歌词显示');
             $player_controls_switch_of_lrc.html('<i class="fa fa-toggle-on" title="关闭歌词"></i>');
         } else {
-            ycgeci = false;
+            if_hide_lrc = false;
             if (hasLrc) {
                 $player_infos_lyric.html('<i class="fa fa-times-circle"></i> 歌词关闭');
             }
@@ -762,7 +755,7 @@ var PlayerInit = function (current_page_url) {
     if (showLrc == 0) {
         //隐藏歌词
         $('#Lrc').addClass('hide');
-        ycgeci = false;
+        if_hide_lrc = false;
         if (hasLrc) {
             $player_infos_lyric.html('<i class="fa fa-times-circle"></i> 歌词关闭');
         }
@@ -881,7 +874,7 @@ var PlayerInit = function (current_page_url) {
             var scrollHeight = $(window.document).height();
             var windowHeight = $(this).height();
             if (scrollTop + windowHeight == scrollHeight) {
-                if (if_show_lrc && ycgeci) {
+                if (if_show_lrc && if_hide_lrc) {
                     $player.addClass('ksclrc');
                     $('#Lrc').addClass('hide');
                     $('#Ksc').addClass('hidePlayer');
@@ -892,7 +885,7 @@ var PlayerInit = function (current_page_url) {
                     }
                 }
             } else {
-                if (if_show_lrc && ycgeci) {
+                if (if_show_lrc && if_hide_lrc) {
                     $player.removeClass('ksclrc');
                     $('#Lrc').removeClass('hide');
                     $('#Ksc').removeClass('hidePlayer');
