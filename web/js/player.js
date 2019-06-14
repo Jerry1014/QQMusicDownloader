@@ -541,14 +541,14 @@ var PlayerInit = function (current_page_url) {
                         : Player.playList.creat.song(a, false);
                     $player.addClass("showSongList")
                 });
-                songTotal = songSheetList[albumId].songIds.length;
+                songTotal = songSheetList[albumId].songNames.length;
 
                 random ? Media.getInfos(window.parseInt(Math.random() * songTotal))
                     : Media.getInfos(Media.getSongId(0));
 
             },
             song: function (id, isThisAlbum) {
-                songTotal = songSheetList[id].songIds.length;
+                songTotal = songSheetList[id].songNames.length;
                 $(".song-list .musicheader span", $player)
                     .text(songSheetList[id].songSheetName + "(" + songTotal + ")");
                 var songList = '';
@@ -935,7 +935,6 @@ function play_music() {
         "songSheetName": "test",
         "author": "test",
         "songSrcs": ['http://ws.stream.qqmusic.qq.com/C400004EzHKM2jXY9i.m4a?fromtag=0&guid=126548448&vkey=E376F4C8AB20BC8116C3FA51BA94150FBE0F794A1F0B59022254A59B2CA75472099C73477359D972B211D0116601C5869CC910132C564915'],
-        "songIds": ['108242'],
         "songNames": ['红玫瑰'],
         "albumNames": ['认了吧'],
         "artistNames": ['陈奕迅'],
