@@ -179,7 +179,6 @@ var PlayerInit = function (current_page_url) {
         $volumeSlider = $('.volume-controls .slider', $player);
     $rateBuffered = $('.musicbottom .rate-buffered', $player);
     $rateSlider = $('.rate .progress', $player);
-    songFrom33 = '开启',
         songFrom44 = '',
         songFrom55 = '',
         roundcolor = '#6c6971',
@@ -195,7 +194,7 @@ var PlayerInit = function (current_page_url) {
         rateIsDown = false,
         rateMouse = {},
         rateTouch = {},
-        hasgeci = true,
+        if_show_lrc = true,
         cicleTime = null,
         hasLrc = false,
         lrcTimeLine = [],
@@ -362,7 +361,7 @@ var PlayerInit = function (current_page_url) {
     });
     //音乐暂停事件
     $('.pause', $player).click(function () {
-        hasgeci = false;
+        if_show_lrc = false;
         $("li", $albumList).eq(albumId).addClass(cur).find(".artist").html("暂停播放 > ").parent().siblings()
             .removeClass(cur).find(".artist").html("").parent();
         Tips.show('暂停播放 - ' + songSheetList[albumId].songNames[songId]);
@@ -375,7 +374,7 @@ var PlayerInit = function (current_page_url) {
     });
     //音乐播放事件
     $('.play', $player).click(function () {
-        hasgeci = true;
+        if_show_lrc = true;
         $('#Lrc,#Ksc').show();
         $("li", $albumList).eq(albumId).addClass(cur).find(".artist").html("当前播放 > ").parent().siblings()
             .removeClass(cur).find(".artist").html("").parent();
@@ -387,14 +386,14 @@ var PlayerInit = function (current_page_url) {
     });
     //上一首事件
     $('.prev', $player).click(function () {
-        hasgeci = true;
+        if_show_lrc = true;
         $('#Lrc,#Ksc').show();
         Media.prev();
         $.cookie("auto_playre", "yes");
     });
     //下一首事件
     $('.next', $player).click(function () {
-        hasgeci = true;
+        if_show_lrc = true;
         $('#Lrc,#Ksc').show();
         Media.next();
         $.cookie("auto_playre", "yes");
@@ -521,7 +520,6 @@ var PlayerInit = function (current_page_url) {
                 $player_infos_lyric.html('<i class="fa fa-check-circle"></i> 歌词开启')
             }
             Tips.show('开启歌词显示');
-            songFrom33 = '开启';
             $player_controls_switch_of_lrc.html('<i class="fa fa-toggle-on" title="关闭歌词"></i>');
         } else {
             ycgeci = false;
@@ -529,7 +527,6 @@ var PlayerInit = function (current_page_url) {
                 $player_infos_lyric.html('<i class="fa fa-times-circle"></i> 歌词关闭');
             }
             Tips.show('歌词显示已关闭');
-            songFrom33 = '关闭';
             $player_controls_switch_of_lrc.html('<i class="fa fa-toggle-off" title="打开歌词"></i>')
         }
         musicTooltip();
@@ -579,7 +576,7 @@ var PlayerInit = function (current_page_url) {
                     $songList.mCustomScrollbar("scrollTo", "top");
                 }
                 $('li', $songList).click(function () {
-                    hasgeci = true;
+                    if_show_lrc = true;
                     $('#Lrc,#Ksc').show();
                     albumId = id;
                     if ($(this).hasClass(cur)) {
@@ -600,10 +597,10 @@ var PlayerInit = function (current_page_url) {
             hasLrc = false;
             $('#Lrc,#Ksc').html('');
             setTimeout(function () {
-                if (hasgeci) {
-                    $player_infos_lyric.html('<i class="fa fa-check-circle"></i> 歌词' + songFrom33)
+                if (if_show_lrc) {
+                    $player_infos_lyric.html('<i class="fa fa-check-circle"></i> 歌词开启')
                 } else {
-                    $player_infos_lyric.html('<i class="fa fa-times-circle"></i> 歌词' + songFrom33)
+                    $player_infos_lyric.html('<i class="fa fa-times-circle"></i> 歌词关闭')
                 }
                 $('.switch-down').css('right', '65px');
                 $('.switch-ksclrc').show();
@@ -781,7 +778,6 @@ var PlayerInit = function (current_page_url) {
             $player_infos_lyric.html('<i class="fa fa-times-circle"></i> 歌词关闭');
         }
         Tips.show('歌词显示已关闭');
-        songFrom33 = '关闭';
         $player_controls_switch_of_lrc.html('<i class="fa fa-toggle-off" title="打开歌词"></i>')
     }
     if (showGreeting == 1) {
@@ -896,7 +892,7 @@ var PlayerInit = function (current_page_url) {
             var scrollHeight = $(window.document).height();
             var windowHeight = $(this).height();
             if (scrollTop + windowHeight == scrollHeight) {
-                if (hasgeci && ycgeci) {
+                if (if_show_lrc && ycgeci) {
                     $player.addClass('ksclrc');
                     $('#Lrc').addClass('hide');
                     $('#Ksc').addClass('hidePlayer');
@@ -907,7 +903,7 @@ var PlayerInit = function (current_page_url) {
                     }
                 }
             } else {
-                if (hasgeci && ycgeci) {
+                if (if_show_lrc && ycgeci) {
                     $player.removeClass('ksclrc');
                     $('#Lrc').removeClass('hide');
                     $('#Ksc').removeClass('hidePlayer');
