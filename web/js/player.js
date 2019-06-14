@@ -20,7 +20,7 @@ var PlayerInit = function (current_page_url) {
     //载入css
     if (!(typeof PlayerStyleLoaded !== "undefined" && PlayerStyleLoaded)) {
         var head = $("head"), PlayerStyleLoaded = true;
-        head.append('<link rel="stylesheet" type="text/css" href="'+current_page_url+'css/player.css?version=2">');
+        head.append('<link rel="stylesheet" type="text/css" href="'+current_page_url+'css/player.css?version=3">');
         head.append('<link href="https://libs.baidu.com/fontawesome/4.2.0/css/font-awesome.css" rel="stylesheet" type="text/css">');
     }
 

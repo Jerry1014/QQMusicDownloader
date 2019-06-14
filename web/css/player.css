@@ -1121,18 +1121,18 @@ ul, li {
 }
 
 .coverplay {
-    -webkit-animation:  infinite 20s linear;
-    animation:  infinite 20s linear
+    -webkit-animation: mymove4 infinite 20s linear;
+    animation: mymove4 infinite 20s linear
 }
 
-@keyframes  {
+@keyframes mymove4 {
     100% {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg)
     }
 }
 
-@-webkit-keyframes  {
+@-webkit-keyframes mymove4 {
     100% {
         -webkit-transform: rotate(360deg)
     }
