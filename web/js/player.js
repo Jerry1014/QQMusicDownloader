@@ -179,7 +179,6 @@ var PlayerInit = function (current_page_url) {
         $volumeSlider = $('.volume-controls .slider', $player);
     $rateBuffered = $('.musicbottom .rate-buffered', $player);
     $rateSlider = $('.rate .progress', $player);
-        songFrom44 = '',
         roundcolor = '#6c6971',
         lightcolor = '#81c300',
         cur = 'current',
@@ -609,23 +608,16 @@ var PlayerInit = function (current_page_url) {
                     dataType: 'script',
                     success: function () {
                         if (lrcstr == '') {
-                            songFrom44 = ' - 暂无歌词!';
                             $player_infos_lyric.html('<i class="fa fa-times-circle"></i> 暂无歌词');
                             $('.switch-ksclrc').hide();
                             $('.switch-down').css('right', '35px');
                         } else {
                             if (lrcstr.indexOf('[00') >= 0) {
                                 setTimeout(function () {
-                                        if (!$('#Lrc').hasClass('hide')) {
-                                            songFrom44 = ' - 歌词获取成功!'
-                                        } else {
-                                            songFrom44 = ' - 歌词已关闭！'
-                                        }
                                         Lrc.lrc.format(lrcstr)
                                     },
                                     500)
                             } else {
-                                songFrom44 = ' - 暂无歌词!';
                                 $player_infos_lyric.html('<i class="fa fa-times-circle"></i> 暂无歌词');
                                 $('.switch-ksclrc').hide();
                                 $('.switch-down').css('right', '35px');
@@ -633,7 +625,6 @@ var PlayerInit = function (current_page_url) {
                         }
                     },
                     error: function () {
-                        songFrom44 = ' - 暂无歌词!';
                         $player_infos_lyric.html('<i class="fa fa-times-circle"></i> 暂无歌词');
                         $('.switch-ksclrc').hide();
                         $('.switch-down').css('right', '35px');
