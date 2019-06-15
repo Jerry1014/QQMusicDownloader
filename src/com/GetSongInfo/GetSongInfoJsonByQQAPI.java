@@ -96,16 +96,16 @@ class SongInfoByQQAPI extends SongInfo {
         this.singer = tem_singer_name_list.toString();
 
         this.song_id = song_info.getString("songmid");
-
-        GetSongInfoJsonByQQAPI songinfo = new GetSongInfoJsonByQQAPI();
-        JSONObject songinfoJson = songinfo.getVkey(song_id);
-        try {
-            String vkey = songinfoJson.getJSONObject("data").getJSONArray("items").getJSONObject(0).getString("vkey");
-            if (!vkey.equals("")) {
-                this.song_url = String.format("http://ws.stream.qqmusic.qq.com/C400%s.m4a?fromtag=0&guid=126548448&vkey=%s", song_id, vkey);
-            }
-        } catch (IndexOutOfBoundsException e) {
-            e.printStackTrace();
-        }
+        //以下部分用于获取播放vkey，已被我单独拎出来做servlet了，且SongInfo中的Vkey也被删除
+//        GetSongInfoJsonByQQAPI songinfo = new GetSongInfoJsonByQQAPI();
+//        JSONObject songinfoJson = songinfo.getVkey(song_id);
+//        try {
+//            String vkey = songinfoJson.getJSONObject("data").getJSONArray("items").getJSONObject(0).getString("vkey");
+//            if (!vkey.equals("")) {
+//                this.song_url = String.format("http://ws.stream.qqmusic.qq.com/C400%s.m4a?fromtag=0&guid=126548448&vkey=%s", song_id, vkey);
+//            }
+//        } catch (IndexOutOfBoundsException e) {
+//            e.printStackTrace();
+//        }
     }
 }
