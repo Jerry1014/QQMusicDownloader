@@ -13,7 +13,6 @@ import java.util.List;
 public class GetSongInfoJsonByQQAPI extends GetSongInfo {
     // 歌曲信息请求设置
     private String each_page_song_num = "10";
-    private String total_page_num = null;
 
     private String request_url = "https://c.y.qq.com/soso/fcgi-bin/client_search_cp?aggr=1&cr=1&flag_qc=0&p=%s&n=%s&w=%s";
     private String recommend_request_url = "https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg?g_tk=5381&uin=0&format=json&inCharset=utf-8&outCharset=utf-8%C2%ACice=0&platform=h5&needNewCode=1&tpl=3&page=detail&type=top&topid=35&_=1520777874472";

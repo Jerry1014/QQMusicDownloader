@@ -20,6 +20,7 @@
 
     <link rel="stylesheet" type="text/css" href="assets/live2dCSS.css?version=<%=version%>"/>
     <link rel="stylesheet" type="text/css" href="css/ShowResultCSS.css?version=<%=version%>"/>
+    <% String webApp_page = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";%>
 </head>
 <body>
 <header>
@@ -82,5 +83,14 @@
         document.getElementById("SearchForm").submit();
     }
 </script>
+
+
+<script src="js/jquery-3.4.1.min.js"></script>
+<!-- 以下三个插件，我也不知道是干嘛用的。。。 -->
+<script src="js/mousewheel_plugin.js"></script>
+<script src="js/scrollbar_plugin.js"></script>
+<script src="js/cookie_plugin.js"></script>
+<script src="js/player.js?version=<%=version%>"></script>
+<script type="text/javascript">PlayerInit("<%=webApp_page%>");</script>
 </body>
 </html>
