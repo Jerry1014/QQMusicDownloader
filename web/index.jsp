@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--version记录了最后一次对css文件作修改的时间，用于刷新浏览器的css缓存--%>
-<% String version = "1906061501";
+<% String version = "1906141423";
     application.setAttribute("version", version);%>
 <html>
 <head>
@@ -15,6 +15,7 @@
 
     <link rel="stylesheet" type="text/css" href="css/indexCSS.css?version=<%=version%>"/>
     <link rel="stylesheet" type="text/css" href="assets/live2dCSS.css?version=<%=version%>"/>
+
     <script>
         function show_msg() {
             var msg = "<%=request.getParameter("msg")%>";
@@ -23,6 +24,7 @@
     </script>
 </head>
 <body onload="show_msg()">
+<% String webApp_page = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";%>
 <div id="main">
     <div id="main_pic">
         <img src="img/music.png" alt="假装有一张图片">
@@ -48,6 +50,15 @@
 </div>
 <script src="assets/live2d_ini.js?version=<%=version%>"></script>
 <script src="assets/live2d.js?version=<%=version%>"></script>
-<script type="text/javascript">initModel("./")</script>
+<script type="text/javascript">initModel("<%=webApp_page%>")</script>
+
+<script src="js/jquery-3.4.1.min.js"></script>
+<!-- 以下三个插件，我也不知道是干嘛用的。。。 -->
+<script src="js/mousewheel_plugin.js"></script>
+<script src="js/scrollbar_plugin.js"></script>
+<script src="js/cookie_plugin.js"></script>
+<script src="js/player.js?version=<%=version%>"></script>
+<script type="text/javascript">PlayerInit("<%=webApp_page%>");</script>
+<script type="text/javascript">play_music()</script>
 </body>
 </html>
