@@ -1,3 +1,8 @@
+package com;
+
+import com.GetSongInfo.GetSongInfo;
+import com.GetSongInfo.GetSongInfoJsonByQQAPI;
+
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -18,7 +23,7 @@ public class Search extends javax.servlet.http.HttpServlet {
         if (if_recommend || (keyword != null && keyword.length() > 0)) {
             // 请求qq音乐，得到json结果
             String selected_api = request.getParameter("SelectedApi");
-            GetSongInfoJson song_json_list;
+            GetSongInfo song_json_list;
             //if (selected_api == null) selected_api = "默认";
             switch (selected_api) {
                 case "QQMusic":

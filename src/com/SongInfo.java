@@ -1,11 +1,14 @@
+package com;
+
 public class SongInfo {
-    String album_pic = null;
-    String album_name = null;
-    String song_url = null;
-    String quality = null;
-    String song_name = null;
-    String singer = null;
-    String lrc = null;
+    public String album_pic = null;
+    public String album_name = null;
+    public String song_url = null;
+    public String quality = null;
+    public String song_name = null;
+    public String singer = null;
+    public String lrc = null;
+    public String song_id = null;
 
     public String getAlbum_pic() {
         return album_pic;
@@ -30,4 +33,6 @@ public class SongInfo {
     }
 
     public String getLrc() { return lrc; }
+
+    public String getSong_id() {return song_id;}
 }

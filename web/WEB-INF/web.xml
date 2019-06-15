@@ -5,18 +5,28 @@
          version="4.0">
     <servlet>
         <servlet-name>Search</servlet-name>
-        <servlet-class>Search</servlet-class>
+        <servlet-class>com.Search</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Search</servlet-name>
         <url-pattern>/S</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>LoadLive2d</servlet-name>
-        <servlet-class>LoadLive2d</servlet-class>
+        <servlet-class>com.LoadLive2d</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoadLive2d</servlet-name>
         <url-pattern>/L</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GetSongLrcAndPlaySrc</servlet-name>
+        <servlet-class>com.GetSongLrcOrPlaySrc.GetSongLrcAndPlaySrc</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetSongLrcAndPlaySrc</servlet-name>
+        <url-pattern>/P</url-pattern>
     </servlet-mapping>
 </web-app>

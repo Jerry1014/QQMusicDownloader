@@ -1,3 +1,5 @@
+package com;
+
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
@@ -9,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.*;
 
-@WebServlet(name = "LoadLive2d")
+@WebServlet(name = "com.LoadLive2d")
 public class LoadLive2d extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
