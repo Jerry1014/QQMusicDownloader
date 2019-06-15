@@ -545,7 +545,6 @@ var PlayerInit = function (current_page_url) {
 
                 random ? Media.getInfos(window.parseInt(Math.random() * songTotal))
                     : Media.getInfos(Media.getSongId(0));
-
             },
             song: function (id, isThisAlbum) {
                 songTotal = songSheetList[id].songNames.length;
@@ -680,7 +679,7 @@ var PlayerInit = function (current_page_url) {
     //获取歌单列表数据
     //自改测试
     var autoPlayer = 0, randomPlayer = 0, defaultVolume = 75, showLrc = 1, greeting = '来啦，老弟',
-        showGreeting = 0, defaultAlbum = 1, siteName = 'Jerry', background = 1, playerWidth = -1, coverWidth = -1,
+        showGreeting = 1, defaultAlbum = 1, siteName = 'Jerry', background = 1, playerWidth = -1, coverWidth = -1,
         showNotes = 1, autoPopupPlayer = -1;
     if (playerWidth !== -1) {
         document.body.style.setProperty('--player-width', playerWidth + 'px');
@@ -829,7 +828,7 @@ var PlayerInit = function (current_page_url) {
             if (autoPlayer == 1 && ($.cookie("auto_playre") == null || $.cookie("auto_playre") === "yes")) {
                 startPlay()
             } else {
-                Tips.show('播放器自动暂停');
+                //Tips.show('播放器自动暂停');
                 $cover.removeClass('coverplay');
                 audio.pause();
             }
@@ -934,7 +933,7 @@ function play_music() {
     songSheetList.push({
         "songSheetName": "test",
         "author": "test",
-        "songSrcs": ['http://ws.stream.qqmusic.qq.com/C400004EzHKM2jXY9i.m4a?fromtag=0&guid=126548448&vkey=E376F4C8AB20BC8116C3FA51BA94150FBE0F794A1F0B59022254A59B2CA75472099C73477359D972B211D0116601C5869CC910132C564915'],
+        "songSrcs": ['http://ws.stream.qqmusic.qq.com/C400004EzHKM2jXY9i.m4a?fromtag=0&guid=126548448&vkey=6F84B995C5A7A1AF2F3D6892E078305E2581FF9B67BB92D7123FA6D147DDD6726513B76097D76410F8501F8120D194B7348014161BA1D066'],
         "songNames": ['红玫瑰'],
         "albumNames": ['认了吧'],
         "artistNames": ['陈奕迅'],
