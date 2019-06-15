@@ -928,27 +928,26 @@ var PlayerInit = function (current_page_url) {
     }
 };
 
-function play_music() {
-    //此处的push为设置用，实际使用时应当由参数传入
-    songSheetList.push({
-        "songSheetName": "test",
-        "author": "test",
-        "songSrcs": ['http://ws.stream.qqmusic.qq.com/C400004EzHKM2jXY9i.m4a?fromtag=0&guid=126548448&vkey=6F84B995C5A7A1AF2F3D6892E078305E2581FF9B67BB92D7123FA6D147DDD6726513B76097D76410F8501F8120D194B7348014161BA1D066'],
-        "songNames": ['红玫瑰'],
-        "albumNames": ['认了吧'],
-        "artistNames": ['陈奕迅'],
-        "albumCovers": ['http://imgcache.qq.com/music/photo/album_300/26/300_albumpic_31526_0.jpg'],
-        "lrc": '[00:00.000] 作曲 : 林俊杰[00:00.113] 作词 : 孙燕姿[00:00.340]编曲：蔡政勋[00:01.340]制作人：吴剑泓[00:02.340]配唱制作：许环良[00:03.340]Music Arrangement & Keyboards：蔡政勋[00:04.340]Violin：Ng Yu-Ying[00:05.340]Cello：Lu Bing Xia[00:06.340]Background Vocal Arrangement：林俊杰[00:07.340]Background Vocals：林俊杰[00:08.340]Recorded at The Embassy (Beijing)/The Scape (Singapore)[00:09.340]Recorded by Billy Koh, Zennon Goh[00:10.340]Mixed at The Scape (Singapore)[00:11.340]Mixed by Zennon Goh[00:12.340]OP: Warner/Chappell Music Taiwan Ltd / Touch Music Publishing Pte Ltd., Compass[00:13.340]SP: Warner/Chappell Music Publishing Agency (Beijing) Ltd./北京大石版权音乐有限公司[00:14.340]ISRC TW-B67-10-05201[00:26.040]她静悄悄的来过[00:31.389]她慢慢带走承诺[00:37.009]只是最后的承诺[00:42.599]还是没有带走了寂寞[00:48.289]我们爱的没有错[00:54.590]只是美丽的独秀[00:58.139]太折磨[01:00.319]她说无所谓[01:05.229]只要能在夜里翻来覆去的时候有寄托[01:11.589]等不到天黑[01:13.540]烟火不会太完美[01:17.279]回忆烧成灰[01:19.169]还是等不到结尾[01:23.999]她曾说的无所谓[01:26.169]我怕一天一天被摧毁[01:33.419]等不到天黑[01:36.178]不敢凋谢的花蕾[01:40.400]绿叶在跟随[01:42.299]放开刺痛的滋味[01:45.499]今后不再怕天明[01:50.359]我想只是害怕清醒[02:24.390]她静悄悄的来过[02:30.080]她慢慢带走承诺[02:35.610]只是最后的承诺[02:40.950]还是没有带走了寂寞[02:47.300]我们爱的没有错[02:52.450]只是美丽的独秀[02:56.590]太折磨[02:59.490]她说无所谓[03:03.900]只要能在夜里翻来覆去的时候有寄托[03:11.060]等不到天黑[03:12.760]烟火不会太完美[03:16.400]回忆烧成灰[03:18.000]还是等不到结尾[03:21.860]她曾说的无所谓[03:24.770]我怕一天一天被摧毁[03:33.100]等不到天黑[03:35.400]不敢凋谢的花蕾[03:38.770]绿叶在跟随[03:40.720]放开刺痛的滋味[03:43.630]今后不再怕天明[03:49.360]我想只是害怕清醒[03:55.810]等不到天黑[03:58.000]烟火不会太完美[04:01.550]回忆烧成灰[04:03.580]还是等不到结尾[04:07.940]她曾说的无所谓[04:10.580]我怕一天一天被摧毁[04:18.800]等不到天黑[04:20.579]不敢凋谢的花蕾[04:24.070]绿叶在跟随[04:26.150]放开刺痛的滋味[04:29.120]今后不再怕天明[04:34.880]我想只是害怕清醒[04:41.630]不怕天明[04:46.080]我想只是害怕清醒'
-    });
-    songSheetList.push({
-        "songSheetName": "test",
-        "author": "test",
-        "songSrcs": ['http://ws.stream.qqmusic.qq.com/C400004EzHKM2jXY9i.m4a?fromtag=0&guid=126548448&vkey=6F84B995C5A7A1AF2F3D6892E078305E2581FF9B67BB92D7123FA6D147DDD6726513B76097D76410F8501F8120D194B7348014161BA1D066'],
-        "songNames": ['红玫瑰2'],
-        "albumNames": ['认了吧'],
-        "artistNames": ['陈奕迅'],
-        "albumCovers": ['http://imgcache.qq.com/music/photo/album_300/26/300_albumpic_31526_0.jpg'],
-        "lrc": '[00:00.000] 作曲 : 林俊杰[00:00.113] 作词 : 孙燕姿[00:00.340]编曲：蔡政勋[00:01.340]制作人：吴剑泓[00:02.340]配唱制作：许环良[00:03.340]Music Arrangement & Keyboards：蔡政勋[00:04.340]Violin：Ng Yu-Ying[00:05.340]Cello：Lu Bing Xia[00:06.340]Background Vocal Arrangement：林俊杰[00:07.340]Background Vocals：林俊杰[00:08.340]Recorded at The Embassy (Beijing)/The Scape (Singapore)[00:09.340]Recorded by Billy Koh, Zennon Goh[00:10.340]Mixed at The Scape (Singapore)[00:11.340]Mixed by Zennon Goh[00:12.340]OP: Warner/Chappell Music Taiwan Ltd / Touch Music Publishing Pte Ltd., Compass[00:13.340]SP: Warner/Chappell Music Publishing Agency (Beijing) Ltd./北京大石版权音乐有限公司[00:14.340]ISRC TW-B67-10-05201[00:26.040]她静悄悄的来过[00:31.389]她慢慢带走承诺[00:37.009]只是最后的承诺[00:42.599]还是没有带走了寂寞[00:48.289]我们爱的没有错[00:54.590]只是美丽的独秀[00:58.139]太折磨[01:00.319]她说无所谓[01:05.229]只要能在夜里翻来覆去的时候有寄托[01:11.589]等不到天黑[01:13.540]烟火不会太完美[01:17.279]回忆烧成灰[01:19.169]还是等不到结尾[01:23.999]她曾说的无所谓[01:26.169]我怕一天一天被摧毁[01:33.419]等不到天黑[01:36.178]不敢凋谢的花蕾[01:40.400]绿叶在跟随[01:42.299]放开刺痛的滋味[01:45.499]今后不再怕天明[01:50.359]我想只是害怕清醒[02:24.390]她静悄悄的来过[02:30.080]她慢慢带走承诺[02:35.610]只是最后的承诺[02:40.950]还是没有带走了寂寞[02:47.300]我们爱的没有错[02:52.450]只是美丽的独秀[02:56.590]太折磨[02:59.490]她说无所谓[03:03.900]只要能在夜里翻来覆去的时候有寄托[03:11.060]等不到天黑[03:12.760]烟火不会太完美[03:16.400]回忆烧成灰[03:18.000]还是等不到结尾[03:21.860]她曾说的无所谓[03:24.770]我怕一天一天被摧毁[03:33.100]等不到天黑[03:35.400]不敢凋谢的花蕾[03:38.770]绿叶在跟随[03:40.720]放开刺痛的滋味[03:43.630]今后不再怕天明[03:49.360]我想只是害怕清醒[03:55.810]等不到天黑[03:58.000]烟火不会太完美[04:01.550]回忆烧成灰[04:03.580]还是等不到结尾[04:07.940]她曾说的无所谓[04:10.580]我怕一天一天被摧毁[04:18.800]等不到天黑[04:20.579]不敢凋谢的花蕾[04:24.070]绿叶在跟随[04:26.150]放开刺痛的滋味[04:29.120]今后不再怕天明[04:34.880]我想只是害怕清醒[04:41.630]不怕天明[04:46.080]我想只是害怕清醒'
-    });
-    Player.playList.creat.album()
+function play_music(album,song_name,artist,songSrc,albumCovers,lrc) {
+    for(var i in songSheetList){
+        if(i["songSheetName"] === album){
+            i["songSrcs"].push(songSrc);
+            i["songNames"].push(song_name);
+            i["albumNames"].push(album);
+            i["artistNames"].push(artist);
+            i["albumCovers"].push(albumCovers);
+            i["lrc"].push(lrc);
+            Player.playList.creat.album();
+            return
+        }
+    }
+    i["songSheetName"].push(album);
+    i["author"].push(artist);
+    i["songSrcs"].push(songSrc);
+    i["songNames"].push(song_name);
+    i["albumNames"].push(album);
+    i["artistNames"].push(artist);
+    i["albumCovers"].push(albumCovers);
+    i["lrc"].push(lrc);
+    Player.playList.creat.album();
 }
