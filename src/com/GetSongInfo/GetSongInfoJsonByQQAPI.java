@@ -25,6 +25,7 @@ public class GetSongInfoJsonByQQAPI extends GetSongInfo {
     // 35 QQ音乐巅峰分享榜 36 巅峰榜·K歌金曲
     public List getSongList(String keyword, String page_num, String ua, boolean if_recommend) throws IOException {
         String all_url;
+        // 推荐暂时没有找到更好的，先写死
         if (if_recommend) all_url = recommend_request_url;
         else all_url = String.format(this.request_url, page_num, this.each_page_song_num, keyword);
         String connection_response = Util.request(new URL(all_url), ua, request_method, referer_url);
@@ -73,7 +74,6 @@ class SongInfoByQQAPI extends SongInfo {
         this.song_name = song_info.getString("songname");
         Integer albumid = song_info.getInteger("albumid");
         this.album_pic = String.format("http://imgcache.qq.com/music/photo/album_300/%s/300_albumpic_%s_0.jpg", String.valueOf(albumid % 100), String.valueOf(albumid));
-        this.lrc = "暂无";
 
         if (song_info.getInteger("sizeflac") != 0) {
             this.quality = "flac";
@@ -94,7 +94,8 @@ class SongInfoByQQAPI extends SongInfo {
         }
         this.singer = tem_singer_name_list.toString();
 
-        this.song_id = song_info.getString("songmid");
+        this.song_mid = song_info.getString("songmid");
+        this.song_id = song_info.getString("songid");
         //以下部分用于获取播放vkey，已被我单独拎出来做servlet了，且SongInfo中的Vkey也被删除
 //        GetSongInfoJsonByQQAPI songinfo = new GetSongInfoJsonByQQAPI();
 //        JSONObject songinfoJson = songinfo.getVkey(song_id);
