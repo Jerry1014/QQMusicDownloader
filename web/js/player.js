@@ -823,18 +823,20 @@ var PlayerInit = function (current_page_url) {
         Lrc.load(); //加载歌词
 
         //通过修改此处和startPlay()实现播放的控制
-        if (first == 1) {
-            first = 2;
-            if (autoPlayer == 1 && ($.cookie("auto_playre") == null || $.cookie("auto_playre") === "yes")) {
-                startPlay()
-            } else {
-                //Tips.show('播放器自动暂停');
-                $cover.removeClass('coverplay');
-                audio.pause();
-            }
-        } else {
-            startPlay()
-        }
+        startPlay()
+        // if (first == 1) {
+        //     first = 2;
+        //     if (autoPlayer == 1 && ($.cookie("auto_playre") == null || $.cookie("auto_playre") === "yes")) {
+        //         startPlay()
+        //     } else {
+        //         //Tips.show('播放器自动暂停');
+        //         $cover.removeClass('coverplay');
+        //         audio.pause();
+        //     }
+        // } else {
+        //     startPlay()
+        // }
+
         // 歌词自动隐藏
         $(window).scroll(function () {
             var scrollTop = $(this).scrollTop();
@@ -929,32 +931,23 @@ var PlayerInit = function (current_page_url) {
 };
 
 function add_song_to_player(album, song_name, artist, songSrc, albumCovers, lrc) {
-    // 暂时做不到保存播放历史，因为播放器重构未完成，所以每次都会新建SongSheetList
-    // for (var i in songSheetList) {
-    //     if (i["songSheetName"] === album) {
-    //         i["songSrcs"].push(songSrc);
-    //         i["songNames"].push(song_name);
-    //         i["albumNames"].push(album);
-    //         i["artistNames"].push(artist);
-    //         i["albumCovers"].push(albumCovers);
-    //         i["lrc"].push(lrc);
-    //         Player.playList.creat.album();
-    //         return
-    //     }
-    // }
-    // songSheetList.push(
-    //     {
-    //         "songSheetName": [album],
-    //         "author": [artist],
-    //         "songSrcs": [songSrc],
-    //         "songNames": [song_name],
-    //         "albumNames": [album],
-    //         "artistNames": [artist],
-    //         "albumCovers": [albumCovers],
-    //         "lrc": [lrc]
-    //     }
-    // );
-    songSheetList = [{
+    for (var index = 0; index < songSheetList.length; index++) {
+        var i = songSheetList[index];
+        if (i["songSheetName"] === album) {
+            albumId = index;
+            i["songSrcs"].push(songSrc);
+            i["songNames"].push(song_name);
+            songId = i["songNames"].length - 1;
+            i["albumNames"].push(album);
+            i["artistNames"].push(artist);
+            i["albumCovers"].push(albumCovers);
+            i["lrc"].push(lrc);
+            Player.playList.creat.album();
+            return
+        }
+    }
+    songSheetList.push(
+        {
             "songSheetName": [album],
             "author": [artist],
             "songSrcs": [songSrc],
@@ -962,6 +955,10 @@ function add_song_to_player(album, song_name, artist, songSrc, albumCovers, lrc)
             "albumNames": [album],
             "artistNames": [artist],
             "albumCovers": [albumCovers],
-            "lrc": [lrc]}];
+            "lrc": [lrc]
+        }
+    );
+    albumId = songSheetList.length-1;
+    songId = 0;
     Player.playList.creat.album();
 }
