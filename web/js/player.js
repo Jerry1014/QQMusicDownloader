@@ -544,7 +544,7 @@ var PlayerInit = function (current_page_url) {
                 songTotal = songSheetList[albumId].songNames.length;
 
                 random ? Media.getInfos(window.parseInt(Math.random() * songTotal))
-                    : Media.getInfos(Media.getSongId(0));
+                    : Media.getInfos(Media.getSongId(songId));
             },
             song: function (id, isThisAlbum) {
                 songTotal = songSheetList[id].songNames.length;
@@ -935,9 +935,16 @@ function add_song_to_player(album, song_name, artist, songSrc, albumCovers, lrc)
         var i = songSheetList[index];
         if (i["songSheetName"] === album) {
             albumId = index;
-            i["songSrcs"].push(songSrc);
+            for (var j = 0; j < i["songNames"].length; j++) {
+                if (i["songNames"][j] === song_name) {
+                    songId=j;
+                    Player.playList.creat.album();
+                    return;
+                }
+            }
             i["songNames"].push(song_name);
             songId = i["songNames"].length - 1;
+            i["songSrcs"].push(songSrc);
             i["albumNames"].push(album);
             i["artistNames"].push(artist);
             i["albumCovers"].push(albumCovers);
@@ -948,8 +955,8 @@ function add_song_to_player(album, song_name, artist, songSrc, albumCovers, lrc)
     }
     songSheetList.push(
         {
-            "songSheetName": [album],
-            "author": [artist],
+            "songSheetName": album,
+            "author": artist,
             "songSrcs": [songSrc],
             "songNames": [song_name],
             "albumNames": [album],
@@ -958,7 +965,7 @@ function add_song_to_player(album, song_name, artist, songSrc, albumCovers, lrc)
             "lrc": [lrc]
         }
     );
-    albumId = songSheetList.length-1;
+    albumId = songSheetList.length - 1;
     songId = 0;
     Player.playList.creat.album();
 }
