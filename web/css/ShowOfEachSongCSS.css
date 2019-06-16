@@ -47,20 +47,21 @@ li {
     width: auto;
     position: absolute;
     left: 40%;
+    text-align:center
 }
 
 .icon_download {
     position: relative;
-    top: -8px;
+    top: 20px;
     height: 40px;
     width: 40px;
     border: 0;
     background-size: 40px auto;
     background-color: transparent;
-    background-image: url("../img/download.png");
+    background-image: url("../img/play.png");
     transition-duration: 0.4s;
 }
 
 .icon_download:hover {
-    background-image: url("../img/download_hover.png");
+    background-image: url("../img/play_hover.png");
 }
