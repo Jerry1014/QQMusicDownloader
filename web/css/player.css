@@ -312,6 +312,9 @@ ul, li {
     height: 5px;
     border-radius: 2px;
     margin: auto;
+
+    /*这个是我临时加的，为了解决未知的修改导致的播放器布局问题*/
+    top: 10px;
 }
 
 #Player .player .musicbottom .rate .progress .rate-on {
@@ -1548,7 +1551,9 @@ ul, li {
     border-radius: 7px;
     position: absolute;
     left: -3px;
-    bottom: 25px;
+
+    /*此处为临时修改，原值为25，暂时用于解决播放器布局问题*/
+    bottom: 15px;
     flex-direction: column;
     align-items: center;
     display: none;
