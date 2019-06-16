@@ -593,7 +593,7 @@ var PlayerInit = function (current_page_url) {
                 }
                 $('.switch-down').css('right', '65px');
                 $('.switch-ksclrc').show();
-                var lrcstr = songSheetList[albumId].lrc;
+                var lrcstr = songSheetList[albumId].lrc[songId];
                 if (lrcstr == '') {
                     $player_infos_lyric.html('<i class="fa fa-times-circle"></i> 暂无歌词');
                     $('.switch-ksclrc').hide();

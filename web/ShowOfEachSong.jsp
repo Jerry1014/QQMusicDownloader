@@ -13,7 +13,7 @@
         </div>
         <div id="play_download" class="song_info">
                 <%--            <audio style="overflow:hidden" src="${a_song.song_url}" controls></audio>--%>
-            <input type="button" class="icon_download" onclick="play_music('${a_song.song_id}','${a_song.album_name}','${a_song.song_name}','${a_song.singer}','${a_song.album_pic}')"/>
+            <input type="button" class="icon_download" onclick="play_music('${a_song.song_id}','${a_song.song_mid}','${a_song.album_name}','${a_song.song_name}','${a_song.singer}','${a_song.album_pic}')"/>
 <%--            <input type="button" class="icon_download" onclick="window.open('${a_song.song_url}')"/>--%>
         </div>
     </li>

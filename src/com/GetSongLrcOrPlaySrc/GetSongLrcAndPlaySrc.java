@@ -61,8 +61,21 @@ public class GetSongLrcAndPlaySrc extends HttpServlet {
                 my_response = Util.request(new URL(request_url), ua, request_method, String.format(referer_lrc_url, song_mid));
                 responseJson = JSONObject.parseObject(my_response);
                 song_lrc = responseJson.getString("lyric");
+
+                //歌词清洗
+                song_lrc = song_lrc.substring(song_lrc.indexOf("[00"));
+                song_lrc = song_lrc.replaceAll("&#124;", "|");
+                song_lrc = song_lrc.replaceAll("&#58;", ":");
+                song_lrc = song_lrc.replaceAll("&#46;", ".");
+                song_lrc = song_lrc.replaceAll("&#45;", "-");
+                song_lrc = song_lrc.replaceAll("&#41;", ")");
+                song_lrc = song_lrc.replaceAll("&#40;", "(");
+                song_lrc = song_lrc.replaceAll("&#32;", " ");
+                song_lrc = song_lrc.replaceAll("&#10;", "");
+                if (song_lrc.contains("&#")) System.out.println("歌词中仍然有不可识别的字符" + song_lrc);
+
                 response_json.put("result_lrc", "success");
-            }catch (IndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException e) {
                 e.printStackTrace();
                 response_json.put("result_lrc", "error");
             }
