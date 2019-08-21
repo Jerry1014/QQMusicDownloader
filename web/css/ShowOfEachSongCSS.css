@@ -1,8 +1,6 @@
-/*改了css，一定要去jsp里面把version改一下*/
-
-li {
-    list-style: none;
-}
+/*li {*/
+/*    list-style: none;*/
+/*}*/
 
 .song_info {
     display: inline-block

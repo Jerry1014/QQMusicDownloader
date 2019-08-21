@@ -8,6 +8,11 @@
 
 ## 功能
 - 搜索试听下载歌曲，曲库源于QQ音乐
+- 界面展示
+    - 首页
+    ![Image text](./image/index.png)
+    - 结果页
+    ![Image text](./image/result.jpg)
 
 ## 特色
 - ~~可试听下载版权歌曲~~

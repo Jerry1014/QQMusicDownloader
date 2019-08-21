@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--version记录了最后一次对css文件作修改的时间，用于刷新浏览器的css缓存--%>
-<% String version = "1906161703";
+<% String version = "1906171950";
     application.setAttribute("version", version);%>
 <html>
 <head>
@@ -45,7 +45,6 @@
 </div>
 
 <div class="live2d_div">
-<%--    <canvas id="live2d" width="280" height="250" class="live2d"></canvas>--%>
     <canvas id="live2d" width="308" height="275" class="live2d"></canvas>
 </div>
 <script src="assets/live2d_ini.js?version=<%=version%>"></script>
